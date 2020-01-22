@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+<data id="engines">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="name" type="string" bytes="45" max_size="0"/>
+<column name="title" type="string" bytes="765" max_size="0"/>
+</columns>
+</metadata>
+<rows>
+<row id="1" name="stock" title="Фондовый рынок и рынок депозитов"/>
+<row id="2" name="state" title="Рынок ГЦБ (размещение)"/>
+<row id="3" name="currency" title="Валютный рынок"/>
+<row id="4" name="futures" title="Срочный рынок"/>
+<row id="5" name="commodity" title="Товарный рынок"/>
+<row id="6" name="interventions" title="Товарные интервенции"/>
+<row id="7" name="offboard" title="ОТС-система"/>
+</rows>
+</data>
+<data id="markets">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="trade_engine_id" type="int32"/>
+<column name="trade_engine_name" type="string" bytes="45" max_size="0"/>
+<column name="trade_engine_title" type="string" bytes="765" max_size="0"/>
+<column name="market_name" type="string" bytes="45" max_size="0"/>
+<column name="market_title" type="string" bytes="765" max_size="0"/>
+<column name="market_id" type="int32"/>
+<column name="marketplace" type="string" bytes="48" max_size="0"/>
+</columns>
+</metadata>
+<rows>
+<row id="5" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="index" market_title="Индексы фондового рынка" market_id="5" marketplace="INDICES"/>
+<row id="1" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="shares" market_title="Рынок акций" market_id="1" marketplace="MXSE"/>
+<row id="2" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="bonds" market_title="Рынок облигаций" market_id="2" marketplace="MXSE"/>
+<row id="4" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="ndm" market_title="Режим переговорных сделок" market_id="4" marketplace=""/>
+<row id="29" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="otc" market_title="ОТС" market_id="29" marketplace=""/>
+<row id="27" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="ccp" market_title="РЕПО с ЦК" market_id="27" marketplace="MXSE"/>
+<row id="35" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="deposit" market_title="Депозиты с ЦК" market_id="35" marketplace=""/>
+<row id="3" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="repo" market_title="Рынок сделок РЕПО" market_id="3" marketplace=""/>
+<row id="28" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="qnv" market_title="Квал. инвесторы" market_id="28" marketplace=""/>
+<row id="36" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="mamc" market_title="Мультивалютный рынок смешанных активов" market_id="36" marketplace=""/>
+<row id="33" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="moexboard" market_title="MOEX Board" market_id="33" marketplace=""/>
+<row id="21" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_name="basket" market_title="Бивалютная корзина" market_id="21" marketplace=""/>
+<row id="10" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_name="selt" market_title="Биржевые сделки с ЦК" market_id="10" marketplace="MXCX"/>
+<row id="34" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_name="futures" market_title="Поставочные фьючерсы" market_id="34" marketplace="MXCX"/>
+<row id="41" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_name="index" market_title="Валютный фиксинг" market_id="41" marketplace="FIXING"/>
+<row id="12" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_name="main" market_title="Срочные инструменты" market_id="12" marketplace=""/>
+<row id="22" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_name="forts" market_title="ФОРТС" market_id="22" marketplace="FORTS"/>
+<row id="24" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_name="options" market_title="Опционы ФОРТС" market_id="24" marketplace="OPTIONS"/>
+<row id="37" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_name="fortsiqs" market_title="Фьючерсы IQS" market_id="37" marketplace=""/>
+<row id="38" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_name="optionsiqs" market_title="Опционы IQS" market_id="38" marketplace=""/>
+<row id="9" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_name="index" market_title="Индексы ГКО/ОФЗ" market_id="9" marketplace=""/>
+<row id="6" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_name="bonds" market_title="Облигации ГЦБ" market_id="6" marketplace=""/>
+<row id="7" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_name="repo" market_title="Междилерское РЕПО" market_id="7" marketplace=""/>
+<row id="8" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_name="ndm" market_title="Внесистемные сделки" market_id="8" marketplace=""/>
+<row id="39" trade_engine_id="7" trade_engine_name="offboard" trade_engine_title="ОТС-система" market_name="bonds" market_title="Облигации" market_id="39" marketplace=""/>
+<row id="18" trade_engine_id="5" trade_engine_name="commodity" trade_engine_title="Товарный рынок" market_name="futures" market_title="Секция стандартных контрактов АО НТБ" market_id="18" marketplace=""/>
+<row id="20" trade_engine_id="6" trade_engine_name="interventions" trade_engine_title="Товарные интервенции" market_name="grain" market_title="Интервенции по зерну" market_id="20" marketplace=""/>
+<row id="23" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="standard" market_title="Standard" market_id="23" marketplace=""/>
+<row id="25" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_name="classica" market_title="Classica" market_id="25" marketplace=""/>
+</rows>
+</data>
+<data id="boards">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="board_group_id" type="int32"/>
+<column name="engine_id" type="int32"/>
+<column name="market_id" type="int32"/>
+<column name="boardid" type="string" bytes="12" max_size="0"/>
+<column name="board_title" type="string" bytes="381" max_size="0"/>
+<column name="is_traded" type="int32"/>
+<column name="has_candles" type="int32"/>
+<column name="is_primary" type="int32"/>
+</columns>
+</metadata>
+<rows>
+<row id="260" board_group_id="99" engine_id="1" market_id="1" boardid="EQTD" board_title="Т0 ETF (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="177" board_group_id="57" engine_id="1" market_id="1" boardid="TQIF" board_title="Т+: Паи - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="178" board_group_id="57" engine_id="1" market_id="1" boardid="TQTF" board_title="Т+: ETF - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="129" board_group_id="57" engine_id="1" market_id="1" boardid="TQBR" board_title="Т+: Акции и ДР - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="130" board_group_id="57" engine_id="1" market_id="1" boardid="TQBS" board_title="Т+: А2-Акции и паи - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="131" board_group_id="57" engine_id="1" market_id="1" boardid="TQNL" board_title="Т+: Б-Акции и паи - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="132" board_group_id="57" engine_id="1" market_id="1" boardid="TQLV" board_title="Т+: В-Акции и ДР - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="133" board_group_id="57" engine_id="1" market_id="1" boardid="TQLI" board_title="Т+: И-Акции - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="134" board_group_id="57" engine_id="1" market_id="1" boardid="TQNE" board_title="Т+: Акции, паи и ДР внесписочные - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="224" board_group_id="57" engine_id="1" market_id="1" boardid="TQBD" board_title="Т+: Акции и ДР (расч. в USD) - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="158" board_group_id="57" engine_id="1" market_id="1" boardid="TQDE" board_title="Т+: Акции Д - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="225" board_group_id="156" engine_id="1" market_id="1" boardid="TQTD" board_title="Т+: ETF (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="1" board_group_id="6" engine_id="1" market_id="1" boardid="EQBR" board_title="Основной режим: А1-Акции и паи - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="2" board_group_id="6" engine_id="1" market_id="1" boardid="EQBS" board_title="Основной режим: А2-Акции и паи - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="4" board_group_id="6" engine_id="1" market_id="1" boardid="EQNL" board_title="Основной режим: Б-Акции и паи - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="3" board_group_id="6" engine_id="1" market_id="1" boardid="EQLV" board_title="Основной режим: В-Акции и РДР - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="117" board_group_id="6" engine_id="1" market_id="1" boardid="EQDE" board_title="Основной режим: Акции Д - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="28" board_group_id="6" engine_id="1" market_id="1" boardid="EQLI" board_title="Основной режим: И-Акции - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="5" board_group_id="6" engine_id="1" market_id="1" boardid="EQNE" board_title="Основной режим: Акции и паи внесписочные - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="281" board_group_id="125" engine_id="1" market_id="1" boardid="SPEQ" board_title="Поставка по СК (акции)" is_traded="1" has_candles="1" is_primary="0"/>
+<row id="36" board_group_id="21" engine_id="1" market_id="1" boardid="SMAL" board_title="Т+: Неполные лоты (акции) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="305" board_group_id="42" engine_id="1" market_id="1" boardid="TQDP" board_title="Крупные пакеты - Акции - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="100" board_group_id="42" engine_id="1" market_id="1" boardid="EQDP" board_title="Крупные пакеты - Акции - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="313" board_group_id="157" engine_id="1" market_id="1" boardid="TQBE" board_title="Т+: Акции и ДР (расч. в EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="314" board_group_id="158" engine_id="1" market_id="1" boardid="TQTE" board_title="Т+: ETF (расч. в EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="315" board_group_id="159" engine_id="1" market_id="1" boardid="EQTU" board_title="Т0 ETF (расч. в EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="95" board_group_id="30" engine_id="1" market_id="1" boardid="EQCC" board_title="ЦК - режим основных торгов - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="226" board_group_id="193" engine_id="1" market_id="2" boardid="TQOD" board_title="Т+: Облигации (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="135" board_group_id="58" engine_id="1" market_id="2" boardid="TQOB" board_title="Т+: Гособлигации - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="136" board_group_id="58" engine_id="1" market_id="2" boardid="TQOS" board_title="Т+: А2-Облигации - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="137" board_group_id="58" engine_id="1" market_id="2" boardid="TQNO" board_title="Т+: Б-Облигации - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="138" board_group_id="58" engine_id="1" market_id="2" boardid="TQOV" board_title="Т+: В-Облигации - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="139" board_group_id="58" engine_id="1" market_id="2" boardid="TQNB" board_title="Т+: Облигации внесписочные - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="140" board_group_id="58" engine_id="1" market_id="2" boardid="TQUS" board_title="Т+: Облигации внеспис. в ин.валюте - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="349" board_group_id="58" engine_id="1" market_id="2" boardid="TQCB" board_title="Т+: Облигации- безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="179" board_group_id="68" engine_id="1" market_id="2" boardid="TQTC" board_title="T+: ETC - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="8" board_group_id="7" engine_id="1" market_id="2" boardid="EQOB" board_title="Т0 Облигации - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="9" board_group_id="7" engine_id="1" market_id="2" boardid="EQOS" board_title="Основной режим: А2-Облигации - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="7" board_group_id="7" engine_id="1" market_id="2" boardid="EQNO" board_title="Основной режим: Б-Облигации - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="29" board_group_id="7" engine_id="1" market_id="2" boardid="EQOV" board_title="Основной режим: В-Облигации - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="93" board_group_id="7" engine_id="1" market_id="2" boardid="EQDB" board_title="Основной режим: Облигации Д - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="6" board_group_id="7" engine_id="1" market_id="2" boardid="EQNB" board_title="Основной режим: Облигации внесписочные - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="88" board_group_id="7" engine_id="1" market_id="2" boardid="EQUS" board_title="Основной режим: Облигации внеспис. в ин.валюте - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="165" board_group_id="7" engine_id="1" market_id="2" boardid="EQEO" board_title="Основной режим: Облигации (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="119" board_group_id="105" engine_id="1" market_id="2" boardid="SPOB" board_title="Поставка по ОФЗ" is_traded="1" has_candles="1" is_primary="0"/>
+<row id="176" board_group_id="69" engine_id="1" market_id="2" boardid="EQTC" board_title="T0 ETC - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="37" board_group_id="67" engine_id="1" market_id="2" boardid="EQEU" board_title="Облигации (USD) - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="228" board_group_id="67" engine_id="1" market_id="2" boardid="EQGO" board_title="Облигации (GBP) - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="229" board_group_id="67" engine_id="1" market_id="2" boardid="EQYO" board_title="Облигации (CNY) - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="122" board_group_id="122" engine_id="1" market_id="2" boardid="AUBB" board_title="Выкуп: Аукцион - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="121" board_group_id="123" engine_id="1" market_id="2" boardid="AUCT" board_title="Размещение: Аукцион - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="227" board_group_id="77" engine_id="1" market_id="2" boardid="TQDB" board_title="Крупные пакеты: Облигации - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="323" board_group_id="167" engine_id="1" market_id="2" boardid="TQDU" board_title="Крупные пакеты – Облигации (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="24" board_group_id="201" engine_id="1" market_id="3" boardid="RPMO" board_title="РЕПО-М - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="34" board_group_id="1" engine_id="1" market_id="3" boardid="RPEQ" board_title="РЕПО: Акции и паи - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="23" board_group_id="95" engine_id="1" market_id="3" boardid="RPMA" board_title="РЕПО c акциями - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="35" board_group_id="94" engine_id="1" market_id="3" boardid="RPEU" board_title="РЕПО в ин. валюте (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="162" board_group_id="94" engine_id="1" market_id="3" boardid="RPUA" board_title="РЕПО c акциями (USD) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="163" board_group_id="94" engine_id="1" market_id="3" boardid="RPUO" board_title="РЕПО c облигациями (USD) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="164" board_group_id="90" engine_id="1" market_id="3" boardid="RPEO" board_title="РЕПО в ин. валюте (EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="254" board_group_id="2" engine_id="1" market_id="3" boardid="RPEY" board_title="РЕПО в ин.валюте (CNY) - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="238" board_group_id="2" engine_id="1" market_id="3" boardid="RPGO" board_title="РЕПО c облигациями (GBP) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="96" board_group_id="31" engine_id="1" market_id="3" boardid="RPCC" board_title="РЕПО с ЦК - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="173" board_group_id="59" engine_id="1" market_id="4" boardid="PTIF" board_title="РПС с ЦК: Паи - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="174" board_group_id="59" engine_id="1" market_id="4" boardid="PTTF" board_title="РПС с ЦК: ETF - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="175" board_group_id="59" engine_id="1" market_id="4" boardid="PTTC" board_title="РПС с ЦК: ETC - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="142" board_group_id="59" engine_id="1" market_id="4" boardid="PTEQ" board_title="РПС с ЦК: Акции и ДР - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="143" board_group_id="59" engine_id="1" market_id="4" boardid="PTES" board_title="РПС С ЦК: А2-Акции и паи - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="144" board_group_id="59" engine_id="1" market_id="4" boardid="PTNL" board_title="РПС С ЦК: Б-Акции и паи - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="145" board_group_id="59" engine_id="1" market_id="4" boardid="PTLV" board_title="РПС С ЦК: В-Акции и ДР - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="146" board_group_id="59" engine_id="1" market_id="4" boardid="PTLI" board_title="РПС С ЦК: И-Акции - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="147" board_group_id="59" engine_id="1" market_id="4" boardid="PTNE" board_title="РПС С ЦК: Акции, паи и ДР внесписочные - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="148" board_group_id="59" engine_id="1" market_id="4" boardid="PTOB" board_title="РПС с ЦК: Облигации - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="149" board_group_id="59" engine_id="1" market_id="4" boardid="PTOS" board_title="РПС С ЦК: А2-Облигации - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="150" board_group_id="59" engine_id="1" market_id="4" boardid="PTNO" board_title="РПС С ЦК: Б-Облигации - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="151" board_group_id="59" engine_id="1" market_id="4" boardid="PTOV" board_title="РПС С ЦК: В-Облигации - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="152" board_group_id="59" engine_id="1" market_id="4" boardid="PTNB" board_title="РПС С ЦК: Облигации внесписочные - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="153" board_group_id="59" engine_id="1" market_id="4" boardid="PTUS" board_title="РПС С ЦК: Облигации в ин.валюте - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="154" board_group_id="59" engine_id="1" market_id="4" boardid="PTEU" board_title="РПС с ЦК: Облигации (USD) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="161" board_group_id="59" engine_id="1" market_id="4" boardid="PTDE" board_title="РПС с ЦК: Акции Д - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="233" board_group_id="74" engine_id="1" market_id="4" boardid="PSSD" board_title="РПС: Акции и ДР (USD) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="234" board_group_id="74" engine_id="1" market_id="4" boardid="PSTD" board_title="РПС: ETF (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="170" board_group_id="8" engine_id="1" market_id="4" boardid="PSIF" board_title="РПС: Паи - адрес." is_traded="1" has_candles="0" is_primary="1"/>
+<row id="171" board_group_id="8" engine_id="1" market_id="4" boardid="PSTF" board_title="РПС: ETF - адрес." is_traded="1" has_candles="0" is_primary="1"/>
+<row id="172" board_group_id="8" engine_id="1" market_id="4" boardid="PSTC" board_title="РПС: ETC - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="11" board_group_id="8" engine_id="1" market_id="4" boardid="PSEQ" board_title="РПС: Акции - адрес." is_traded="1" has_candles="0" is_primary="1"/>
+<row id="12" board_group_id="8" engine_id="1" market_id="4" boardid="PSES" board_title="РПС: А2-Акции и паи - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="15" board_group_id="8" engine_id="1" market_id="4" boardid="PSNL" board_title="РПС: Б-Акции и паи - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="32" board_group_id="8" engine_id="1" market_id="4" boardid="PSLV" board_title="РПС: В-Акции и ДР - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="118" board_group_id="8" engine_id="1" market_id="4" boardid="PSDE" board_title="РПС: Акции Д - адрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="31" board_group_id="8" engine_id="1" market_id="4" boardid="PSLI" board_title="РПС: И-Акции - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="14" board_group_id="8" engine_id="1" market_id="4" boardid="PSNE" board_title="РПС: Акции, паи и ДР внесписочные - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="17" board_group_id="8" engine_id="1" market_id="4" boardid="PSOB" board_title="РПС: Облигации - адрес." is_traded="1" has_candles="0" is_primary="1"/>
+<row id="18" board_group_id="8" engine_id="1" market_id="4" boardid="PSOS" board_title="РПС: А2-Облигации - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="16" board_group_id="8" engine_id="1" market_id="4" boardid="PSNO" board_title="РПС: Б-Облигации - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="33" board_group_id="8" engine_id="1" market_id="4" boardid="PSOV" board_title="РПС: В-Облигации - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="92" board_group_id="8" engine_id="1" market_id="4" boardid="PSDB" board_title="РПС: Облигации Д - адрес." is_traded="1" has_candles="0" is_primary="1"/>
+<row id="13" board_group_id="8" engine_id="1" market_id="4" boardid="PSNB" board_title="РПС: Облигации внесписочные - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="89" board_group_id="8" engine_id="1" market_id="4" boardid="PSUS" board_title="РПС: Облигации в ин.валюте - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="236" board_group_id="8" engine_id="1" market_id="4" boardid="PSYO" board_title="РПС: Облигации (CNY) - адрес." is_traded="0" has_candles="0" is_primary="1"/>
+<row id="30" board_group_id="106" engine_id="1" market_id="4" boardid="PSEU" board_title="РПС: Облигации (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="160" board_group_id="106" engine_id="1" market_id="4" boardid="PSEO" board_title="РПС: Облигации (EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="235" board_group_id="106" engine_id="1" market_id="4" boardid="PSGO" board_title="РПС: Облигации (GBP) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="98" board_group_id="107" engine_id="1" market_id="4" boardid="PSAU" board_title="Размещение - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="99" board_group_id="107" engine_id="1" market_id="4" boardid="PAUS" board_title="Размещение (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="159" board_group_id="107" engine_id="1" market_id="4" boardid="PAEU" board_title="Размещение (EUR) - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="169" board_group_id="107" engine_id="1" market_id="4" boardid="PAGB" board_title="Размещение (GBP) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="237" board_group_id="107" engine_id="1" market_id="4" boardid="PACY" board_title="Размещение (CNY) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="120" board_group_id="108" engine_id="1" market_id="4" boardid="PSBB" board_title="Выкуп - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="278" board_group_id="121" engine_id="1" market_id="4" boardid="PSBE" board_title="Выкуп (EUR) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="282" board_group_id="126" engine_id="1" market_id="4" boardid="OTCB" board_title="Анонимный РПС - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="232" board_group_id="73" engine_id="1" market_id="4" boardid="PTOD" board_title="РПС с ЦК: Облигации (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="230" board_group_id="73" engine_id="1" market_id="4" boardid="PTSD" board_title="РПС с ЦК: Акции и ДР (USD) - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="231" board_group_id="73" engine_id="1" market_id="4" boardid="PTTD" board_title="РПС с ЦК: ETF (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="277" board_group_id="124" engine_id="1" market_id="4" boardid="PSBU" board_title="Выкуп (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="316" board_group_id="160" engine_id="1" market_id="4" boardid="PSSE" board_title="РПС: Акции и ДР (расч. в EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="317" board_group_id="161" engine_id="1" market_id="4" boardid="PSTE" board_title="РПС: ETF (расч. в EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="318" board_group_id="162" engine_id="1" market_id="4" boardid="PTSE" board_title="РПС с ЦК: Акции и ДР (расч. в EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="319" board_group_id="163" engine_id="1" market_id="4" boardid="PTTE" board_title="РПС с ЦК: ETF (расч. в EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="97" board_group_id="32" engine_id="1" market_id="4" boardid="PSCC" board_title="РПС с ЦК - адрес." is_traded="0" has_candles="0" is_primary="0"/>
+<row id="44" board_group_id="9" engine_id="1" market_id="5" boardid="SNDX" board_title="Индексы фондового рынка" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="102" board_group_id="9" engine_id="1" market_id="5" boardid="RTSI" board_title="Индексы РТС" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="265" board_group_id="104" engine_id="1" market_id="5" boardid="INAV" board_title="INAV" is_traded="1" has_candles="1" is_primary="0"/>
+<row id="312" board_group_id="155" engine_id="1" market_id="5" boardid="MMIX" board_title="Money Market IndeX" is_traded="1" has_candles="1" is_primary="0"/>
+<row id="104" board_group_id="36" engine_id="1" market_id="23" boardid="STMR" board_title="Standard: дневная сессия - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="105" board_group_id="36" engine_id="1" market_id="23" boardid="SDMR" board_title="Standard: вечерняя сессия - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="108" board_group_id="41" engine_id="1" market_id="23" boardid="STAD" board_title="Standard: дневная сессия - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="109" board_group_id="41" engine_id="1" market_id="23" boardid="SDAD" board_title="Standard: вечерняя сессия - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="106" board_group_id="40" engine_id="1" market_id="23" boardid="STRP" board_title="Standard: сделки репо, дневная сессия - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="107" board_group_id="40" engine_id="1" market_id="23" boardid="SDRP" board_title="Standard: сделки репо, вечерняя сессия - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="112" board_group_id="43" engine_id="1" market_id="25" boardid="CLMR" board_title="Classica - безадрес." is_traded="0" has_candles="1" is_primary="1"/>
+<row id="113" board_group_id="44" engine_id="1" market_id="25" boardid="CLAD" board_title="Classica - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="239" board_group_id="92" engine_id="1" market_id="27" boardid="EQRD" board_title="РЕПО с ЦК 1 день (USD) - безадрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="240" board_group_id="93" engine_id="1" market_id="27" boardid="EQRE" board_title="РЕПО с ЦК 1 день (EUR) - безадрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="241" board_group_id="76" engine_id="1" market_id="27" boardid="EQWP" board_title="РЕПО с ЦК 7 дн. - безадрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="245" board_group_id="78" engine_id="1" market_id="27" boardid="EQWD" board_title="РЕПО с ЦК 7 дней (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="246" board_group_id="79" engine_id="1" market_id="27" boardid="EQWE" board_title="РЕПО с ЦК 7 дней (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="123" board_group_id="50" engine_id="1" market_id="27" boardid="EQRP" board_title="РЕПО с ЦК 1 день - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="298" board_group_id="142" engine_id="1" market_id="27" boardid="EQMP" board_title="РЕПО с ЦК 1 мес.(RUB) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="299" board_group_id="143" engine_id="1" market_id="27" boardid="EQMD" board_title="РЕПО с ЦК 1 мес. (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="300" board_group_id="144" engine_id="1" market_id="27" boardid="EQME" board_title="РЕПО с ЦК 1 мес. (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="301" board_group_id="145" engine_id="1" market_id="27" boardid="EQTP" board_title="РЕПО с ЦК 3 мес. (RUB) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="302" board_group_id="146" engine_id="1" market_id="27" boardid="ETQD" board_title="РЕПО с ЦК 3 мес. (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="303" board_group_id="147" engine_id="1" market_id="27" boardid="EQTE" board_title="РЕПО с ЦК 3 мес. (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="304" board_group_id="148" engine_id="1" market_id="27" boardid="LIQR" board_title="РЕПО с ЦК: Урегулирование - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="309" board_group_id="152" engine_id="1" market_id="27" boardid="EQRY" board_title="РЕПО с ЦК 1 день (CNY) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="310" board_group_id="153" engine_id="1" market_id="27" boardid="PSRY" board_title="РЕПО с ЦК (CNY) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="125" board_group_id="65" engine_id="1" market_id="27" boardid="PSRP" board_title="РЕПО с ЦК - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="242" board_group_id="91" engine_id="1" market_id="27" boardid="PSRD" board_title="РЕПО с ЦК (USD) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="243" board_group_id="96" engine_id="1" market_id="27" boardid="PSRE" board_title="РЕПО с ЦК (EUR) - адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="253" board_group_id="86" engine_id="1" market_id="27" boardid="GCRP" board_title="РЕПО с ЦК с КСУ 1 день - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="250" board_group_id="83" engine_id="1" market_id="27" boardid="GCOW" board_title="РЕПО с ЦК с КСУ 7 дн. - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="247" board_group_id="80" engine_id="1" market_id="27" boardid="GCSW" board_title="РЕПО с ЦК с КСУ 14 дн. - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="251" board_group_id="84" engine_id="1" market_id="27" boardid="GCOM" board_title="РЕПО с ЦК с КСУ 1 месяц - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="248" board_group_id="81" engine_id="1" market_id="27" boardid="GCSM" board_title="РЕПО с ЦК с КСУ 2 месяца - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="252" board_group_id="85" engine_id="1" market_id="27" boardid="GCTM" board_title="РЕПО с ЦК с КСУ 3 месяца - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="264" board_group_id="103" engine_id="1" market_id="27" boardid="GCUM" board_title="РЕПО с ЦК с КСУ 6 мес. - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="263" board_group_id="102" engine_id="1" market_id="27" boardid="GCOY" board_title="РЕПО с ЦК с КСУ 1 год - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="249" board_group_id="82" engine_id="1" market_id="27" boardid="PSGC" board_title="РЕПО с ЦК с КСУ - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="268" board_group_id="111" engine_id="1" market_id="27" boardid="GURP" board_title="РЕПО с ЦК с КСУ 1 день (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="269" board_group_id="112" engine_id="1" market_id="27" boardid="GUOW" board_title="РЕПО с ЦК с КСУ 7 дн. (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="270" board_group_id="113" engine_id="1" market_id="27" boardid="GUSW" board_title="РЕПО с ЦК с КСУ 14 дн. (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="271" board_group_id="114" engine_id="1" market_id="27" boardid="GUOM" board_title="РЕПО с ЦК с КСУ 1 месяц (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="272" board_group_id="115" engine_id="1" market_id="27" boardid="GUSM" board_title="РЕПО с ЦК с КСУ 2 месяца (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="273" board_group_id="116" engine_id="1" market_id="27" boardid="GUTM" board_title="РЕПО с ЦК с КСУ 3 месяца (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="274" board_group_id="117" engine_id="1" market_id="27" boardid="GUUM" board_title="РЕПО с ЦК с КСУ 6 месяцев (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="275" board_group_id="118" engine_id="1" market_id="27" boardid="GUOY" board_title="РЕПО с ЦК с КСУ 1 год (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="276" board_group_id="119" engine_id="1" market_id="27" boardid="PUGC" board_title="РЕПО с ЦК с КСУ (USD) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="283" board_group_id="127" engine_id="1" market_id="27" boardid="GERP" board_title="РЕПО с ЦК с КСУ 1 день (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="284" board_group_id="128" engine_id="1" market_id="27" boardid="GEOW" board_title="РЕПО с ЦК с КСУ 7 дн. (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="285" board_group_id="129" engine_id="1" market_id="27" boardid="GESW" board_title="РЕПО с ЦК с КСУ 14 дн. (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="286" board_group_id="130" engine_id="1" market_id="27" boardid="GEOM" board_title="РЕПО с ЦК с КСУ 1 месяц (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="287" board_group_id="131" engine_id="1" market_id="27" boardid="GESM" board_title="РЕПО с ЦК с КСУ 2 месяца (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="288" board_group_id="132" engine_id="1" market_id="27" boardid="GETM" board_title="РЕПО с ЦК с КСУ 3 месяца (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="289" board_group_id="133" engine_id="1" market_id="27" boardid="GEUM" board_title="РЕПО с ЦК с КСУ 6 месяцев (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="290" board_group_id="134" engine_id="1" market_id="27" boardid="GEOY" board_title="РЕПО с ЦК с КСУ 1 год (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="291" board_group_id="135" engine_id="1" market_id="27" boardid="PEGC" board_title="РЕПО с ЦК с КСУ адресн.(EUR) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="325" board_group_id="169" engine_id="1" market_id="27" boardid="FKRP" board_title="Аукцион с ЦК 1 день - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="327" board_group_id="171" engine_id="1" market_id="27" boardid="FKOW" board_title="Аукцион с ЦК 1 неделя - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="329" board_group_id="173" engine_id="1" market_id="27" boardid="FKSW" board_title="Аукцион с ЦК 2 недели - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="331" board_group_id="175" engine_id="1" market_id="27" boardid="FKOM" board_title="Аукцион с ЦК 1 месяц - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="333" board_group_id="177" engine_id="1" market_id="27" boardid="FKSM" board_title="Аукцион с ЦК 2 месяца - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="335" board_group_id="179" engine_id="1" market_id="27" boardid="FKTM" board_title="Аукцион с ЦК 3 месяца - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="337" board_group_id="181" engine_id="1" market_id="27" boardid="FKUM" board_title="Аукцион с ЦК 6 месяцев - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="339" board_group_id="183" engine_id="1" market_id="27" boardid="FKOY" board_title="Аукцион с ЦК 1 год - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="343" board_group_id="187" engine_id="1" market_id="27" boardid="GSNM" board_title="РЕПО с ЦК с КСУ 9 месяцев - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="345" board_group_id="189" engine_id="1" market_id="27" boardid="GUNM" board_title="РЕПО с ЦК с КСУ 9 мес. (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="347" board_group_id="191" engine_id="1" market_id="27" boardid="GENM" board_title="РЕПО с ЦК с КСУ 9 мес. (EUR) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="167" board_group_id="63" engine_id="1" market_id="28" boardid="TQQI" board_title="Т+: Для квал. инвесторов - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="155" board_group_id="60" engine_id="1" market_id="28" boardid="EQQI" board_title="Основной режим: Для квал. инвесторов - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="156" board_group_id="61" engine_id="1" market_id="28" boardid="PSQI" board_title="РПС: Для квал. инвесторов - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="168" board_group_id="64" engine_id="1" market_id="28" boardid="PTQI" board_title="РПС с ЦК: Для квал. инвесторов - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="157" board_group_id="62" engine_id="1" market_id="28" boardid="RPQI" board_title="РЕПО: Для квал. инвесторов - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="166" board_group_id="62" engine_id="1" market_id="28" boardid="RPUQ" board_title="РЕПО: Для квал. инвесторов (USD) - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="255" board_group_id="87" engine_id="1" market_id="28" boardid="TQQD" board_title="Т+: Для квал. инвесторов (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="183" board_group_id="71" engine_id="1" market_id="29" boardid="SOTC" board_title="Внебиржевые сделки" is_traded="1" has_candles="0" is_primary="1"/>
+<row id="244" board_group_id="72" engine_id="1" market_id="33" boardid="MXBD" board_title="MOEX Board" is_traded="1" has_candles="0" is_primary="1"/>
+<row id="258" board_group_id="97" engine_id="1" market_id="35" boardid="TDEP" board_title="Депозиты с ЦК - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="259" board_group_id="98" engine_id="1" market_id="35" boardid="NDEP" board_title="Депозиты с ЦК - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="266" board_group_id="109" engine_id="1" market_id="35" boardid="NDPU" board_title="Депозиты с ЦК (USD) - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="292" board_group_id="136" engine_id="1" market_id="35" boardid="NDPE" board_title="Депозиты с ЦК (EUR) - адрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="267" board_group_id="110" engine_id="1" market_id="35" boardid="TDPU" board_title="Депозиты с ЦК (USD) - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="293" board_group_id="137" engine_id="1" market_id="35" boardid="TDPE" board_title="Депозиты с ЦК (EUR) - безадрес." is_traded="0" has_candles="1" is_primary="0"/>
+<row id="341" board_group_id="185" engine_id="1" market_id="35" boardid="ADEP" board_title="Депозиты с ЦК - Аукцион" is_traded="1" has_candles="1" is_primary="0"/>
+<row id="279" board_group_id="120" engine_id="1" market_id="36" boardid="LIQB" board_title="Продажа обеспечения бирж.рынок - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="19" board_group_id="10" engine_id="2" market_id="6" boardid="MAIN" board_title="ГЦБ" is_traded="0" has_candles="1" is_primary="1"/>
+<row id="25" board_group_id="3" engine_id="2" market_id="7" boardid="RPDD" board_title="Сделки междилерского РЕПО" is_traded="0" has_candles="0" is_primary="1"/>
+<row id="20" board_group_id="11" engine_id="2" market_id="8" boardid="NEGD" board_title="ГЦБ: Внесистемные сделки" is_traded="0" has_candles="0" is_primary="1"/>
+<row id="51" board_group_id="12" engine_id="2" market_id="9" boardid="GNDX" board_title="Индексы ГЦБ" is_traded="0" has_candles="1" is_primary="1"/>
+<row id="21" board_group_id="13" engine_id="3" market_id="10" boardid="CETS" board_title="Системные сделки - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="351" board_group_id="13" engine_id="3" market_id="10" boardid="SDBP" board_title="Крупные сделки - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="52" board_group_id="13" engine_id="3" market_id="10" boardid="CURR" board_title="Дневная сессия" is_traded="0" has_candles="1" is_primary="1"/>
+<row id="116" board_group_id="46" engine_id="3" market_id="10" boardid="CNGD" board_title="Внесистемные сделки- адрес." is_traded="1" has_candles="0" is_primary="0"/>
+<row id="308" board_group_id="151" engine_id="3" market_id="10" boardid="LICU" board_title="Внесистемные сделки урегулирования - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="261" board_group_id="100" engine_id="3" market_id="10" boardid="FIXS" board_title="Фиксинг системный - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="262" board_group_id="101" engine_id="3" market_id="10" boardid="FIXN" board_title="Фиксинг внесистемный- адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="306" board_group_id="149" engine_id="3" market_id="10" boardid="WAPS" board_title="Системные средневзвешенные - безадрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="307" board_group_id="150" engine_id="3" market_id="10" boardid="WAPN" board_title="Внесистемные средневзвешенные - адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="296" board_group_id="140" engine_id="3" market_id="10" boardid="SPEC" board_title="Поставка - безадресные" is_traded="1" has_candles="1" is_primary="0"/>
+<row id="86" board_group_id="26" engine_id="3" market_id="21" boardid="BKT" board_title="Бивалютная корзина" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="256" board_group_id="88" engine_id="3" market_id="34" boardid="FUTS" board_title="Фьючерсы системные - безадрес." is_traded="1" has_candles="1" is_primary="1"/>
+<row id="257" board_group_id="89" engine_id="3" market_id="34" boardid="FUTN" board_title="Фьючерсы внесистемные- адрес." is_traded="1" has_candles="1" is_primary="0"/>
+<row id="321" board_group_id="165" engine_id="3" market_id="41" boardid="FIXI" board_title="Валютный фиксинг" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="22" board_group_id="15" engine_id="4" market_id="12" boardid="FOB" board_title="Фьючерсы и Опционы" is_traded="0" has_candles="1" is_primary="1"/>
+<row id="101" board_group_id="45" engine_id="4" market_id="22" boardid="RFUD" board_title="Фьючерсы" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="103" board_group_id="35" engine_id="4" market_id="24" boardid="ROPD" board_title="Опционы" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="294" board_group_id="138" engine_id="4" market_id="37" boardid="FIQS" board_title="Фьючерсы IQS" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="295" board_group_id="139" engine_id="4" market_id="38" boardid="OIQS" board_title="Опционы IQS" is_traded="1" has_candles="1" is_primary="1"/>
+<row id="80" board_group_id="20" engine_id="5" market_id="18" boardid="FOCM" board_title="Фьючерсы на товарные активы" is_traded="0" has_candles="1" is_primary="1"/>
+<row id="94" board_group_id="24" engine_id="6" market_id="20" boardid="GSEL" board_title="Интервенции по продаже зерна" is_traded="1" has_candles="0" is_primary="1"/>
+<row id="297" board_group_id="141" engine_id="7" market_id="39" boardid="OBBO" board_title="ОТС-система: облигации" is_traded="1" has_candles="1" is_primary="1"/>
+</rows>
+</data>
+<data id="boardgroups">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="trade_engine_id" type="int32"/>
+<column name="trade_engine_name" type="string" bytes="45" max_size="0"/>
+<column name="trade_engine_title" type="string" bytes="765" max_size="0"/>
+<column name="market_id" type="int32"/>
+<column name="market_name" type="string" bytes="45" max_size="0"/>
+<column name="name" type="string" bytes="192" max_size="0"/>
+<column name="title" type="string" bytes="765" max_size="0"/>
+<column name="is_default" type="int32"/>
+<column name="board_group_id" type="int32"/>
+<column name="is_traded" type="int32"/>
+</columns>
+</metadata>
+<rows>
+<row id="9" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="5" market_name="index" name="stock_index" title="Индексы" is_default="1" board_group_id="9" is_traded="1"/>
+<row id="104" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="5" market_name="index" name="stock_index_inav" title="INAV" is_default="0" board_group_id="104" is_traded="1"/>
+<row id="155" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="5" market_name="index" name="stock_index_mmix" title="Money Market IndeX" is_default="0" board_group_id="155" is_traded="1"/>
+<row id="99" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_etf_usd" title="Т0 ETF (USD) - безадрес." is_default="0" board_group_id="99" is_traded="1"/>
+<row id="57" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_tplus" title="Т+: Основной режим - безадрес." is_default="1" board_group_id="57" is_traded="1"/>
+<row id="156" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_tplus_usd" title="Т+: Основной режим (USD) - безадрес." is_default="0" board_group_id="156" is_traded="1"/>
+<row id="6" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares" title="Т0: Основной режим - безадрес." is_default="0" board_group_id="6" is_traded="0"/>
+<row id="125" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_settle" title="Поставка по СК" is_default="0" board_group_id="125" is_traded="1"/>
+<row id="21" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_sm" title="Неполные лоты - безадрес." is_default="0" board_group_id="21" is_traded="1"/>
+<row id="42" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_darkpool" title="Крупные пакеты - безадрес." is_default="0" board_group_id="42" is_traded="1"/>
+<row id="157" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_tplus_eur" title="Т+: Акции и ДР (расч. в EUR) - безадрес." is_default="0" board_group_id="157" is_traded="1"/>
+<row id="158" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_tplus_etf_eur" title="Т+: ETF (расч. в EUR) - безадрес." is_default="0" board_group_id="158" is_traded="1"/>
+<row id="159" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_etf_eur" title="Т0 ETF (расч. в EUR) - безадрес." is_default="0" board_group_id="159" is_traded="1"/>
+<row id="30" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="1" market_name="shares" name="stock_shares_cc" title="ЦК - Режим основных торгов - безадрес." is_default="0" board_group_id="30" is_traded="0"/>
+<row id="193" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_tplus_usd" title="Т+: Основной режим (USD) - безадрес." is_default="0" board_group_id="193" is_traded="1"/>
+<row id="58" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_tplus" title="Т+: Основной режим - безадрес." is_default="0" board_group_id="58" is_traded="1"/>
+<row id="68" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_etc_tplus" title="Т+: Основной режим (ЕТС) - безадрес." is_default="0" board_group_id="68" is_traded="0"/>
+<row id="7" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds" title="Т0: Основной режим - безадрес." is_default="1" board_group_id="7" is_traded="1"/>
+<row id="105" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_settle" title="Поставка по СК" is_default="0" board_group_id="105" is_traded="1"/>
+<row id="69" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_etc" title="Т0: Основной режим (ЕТС) - безадрес." is_default="0" board_group_id="69" is_traded="0"/>
+<row id="67" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_euro" title="Т0: Основной режим (Еврооблигации) - безадрес." is_default="0" board_group_id="67" is_traded="0"/>
+<row id="122" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_buyback" title="Выкуп - безадрес." is_default="0" board_group_id="122" is_traded="0"/>
+<row id="123" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_distribution" title="Размещение - безадрес." is_default="0" board_group_id="123" is_traded="1"/>
+<row id="77" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_darkpools" title="Крупные пакеты - безадрес." is_default="0" board_group_id="77" is_traded="1"/>
+<row id="167" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="2" market_name="bonds" name="stock_bonds_darkpools_usd" title="Крупные пакеты – Облигации (USD) - безадрес." is_default="0" board_group_id="167" is_traded="1"/>
+<row id="59" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_tplus" title="Т+: РПС с ЦК - адрес." is_default="0" board_group_id="59" is_traded="1"/>
+<row id="74" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_usd" title="РПС (USD) - адрес." is_default="0" board_group_id="74" is_traded="1"/>
+<row id="8" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm" title="РПС - адрес." is_default="1" board_group_id="8" is_traded="1"/>
+<row id="106" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_currency" title="РПС: В валюте - адрес." is_default="0" board_group_id="106" is_traded="1"/>
+<row id="107" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_issuance" title="РПС: Размещение - адрес." is_default="0" board_group_id="107" is_traded="1"/>
+<row id="108" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_buyback" title="РПС: Выкуп - адрес." is_default="0" board_group_id="108" is_traded="1"/>
+<row id="121" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_buyback_eur" title="РПС: Выкуп (EUR) - адрес." is_default="0" board_group_id="121" is_traded="0"/>
+<row id="126" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_anonymous" title="Анонимный РПС - адрес." is_default="0" board_group_id="126" is_traded="1"/>
+<row id="73" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_tplus_usd" title="Т+: РПС с ЦК (USD) - адрес." is_default="0" board_group_id="73" is_traded="1"/>
+<row id="124" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_buyback_usd" title="РПС: Выкуп (USD) - адрес." is_default="0" board_group_id="124" is_traded="1"/>
+<row id="160" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_eur" title="РПС: Акции и ДР (расч. в EUR) - адрес." is_default="0" board_group_id="160" is_traded="1"/>
+<row id="161" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_etf_eur" title="РПС: ETF (расч. в EUR) - адрес." is_default="0" board_group_id="161" is_traded="1"/>
+<row id="162" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_ccp_eur" title="РПС с ЦК: Акции и ДР (расч. в EUR) - адрес." is_default="0" board_group_id="162" is_traded="1"/>
+<row id="163" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_ccp_etf_eur" title="РПС с ЦК: ETF (расч. в EUR) - адрес." is_default="0" board_group_id="163" is_traded="1"/>
+<row id="32" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="4" market_name="ndm" name="stock_ndm_cc" title="ЦК - РПС - адрес." is_default="0" board_group_id="32" is_traded="0"/>
+<row id="71" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="29" market_name="otc" name="stock_otc" title="Внебиржевые сделки" is_default="1" board_group_id="71" is_traded="1"/>
+<row id="75" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_d" title="РЕПО с ЦК 1 день" is_default="0" board_group_id="75" is_traded="1"/>
+<row id="92" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_d_usd" title="РЕПО с ЦК 1 день (USD) - безадрес." is_default="0" board_group_id="92" is_traded="1"/>
+<row id="93" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_d_eur" title="РЕПО с ЦК 1 день (EUR) - безадрес." is_default="0" board_group_id="93" is_traded="1"/>
+<row id="76" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_w" title="РЕПО с ЦК 7 дней (RUB) - безадрес." is_default="0" board_group_id="76" is_traded="1"/>
+<row id="78" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_w_usd" title="РЕПО с ЦК 7 дней (USD) - безадрес." is_default="0" board_group_id="78" is_traded="1"/>
+<row id="79" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_w_eur" title="РЕПО с ЦК 7 дней (EUR) - безадрес." is_default="0" board_group_id="79" is_traded="1"/>
+<row id="50" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp" title="РЕПО с ЦК 1 день (RUB) - безадрес." is_default="1" board_group_id="50" is_traded="1"/>
+<row id="142" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_m" title="РЕПО с ЦК 1 мес.(RUB) - безадрес." is_default="0" board_group_id="142" is_traded="1"/>
+<row id="143" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_m_usd" title="РЕПО с ЦК 1 мес. (USD) - безадрес." is_default="0" board_group_id="143" is_traded="1"/>
+<row id="144" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_m_eur" title="РЕПО с ЦК 1 мес. (EUR) - безадрес." is_default="0" board_group_id="144" is_traded="1"/>
+<row id="145" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_3m" title="РЕПО с ЦК 3 мес. (RUB) - безадрес." is_default="0" board_group_id="145" is_traded="1"/>
+<row id="146" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_3m_usd" title="РЕПО с ЦК 3 мес. (USD) - безадрес." is_default="0" board_group_id="146" is_traded="1"/>
+<row id="147" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_3m_eur" title="РЕПО с ЦК 3 мес. (EUR) - безадрес." is_default="0" board_group_id="147" is_traded="1"/>
+<row id="148" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_liq" title="РЕПО с ЦК: Урегулирование - безадрес." is_default="0" board_group_id="148" is_traded="1"/>
+<row id="152" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_d_cny" title="РЕПО с ЦК 1 день (CNY) - безадрес." is_default="0" board_group_id="152" is_traded="1"/>
+<row id="153" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_ndm_cny" title="РЕПО с ЦК (CNY) - адрес." is_default="0" board_group_id="153" is_traded="1"/>
+<row id="65" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_ndm" title="РЕПО с ЦК (RUB) - адрес." is_default="0" board_group_id="65" is_traded="1"/>
+<row id="91" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_ndm_usd" title="РЕПО с ЦК (USD) - адрес." is_default="0" board_group_id="91" is_traded="1"/>
+<row id="96" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_ndm_eur" title="РЕПО с ЦК (EUR) - адрес." is_default="0" board_group_id="96" is_traded="1"/>
+<row id="86" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_d" title="РЕПО с ЦК с КСУ 1 день - безадрес." is_default="0" board_group_id="86" is_traded="1"/>
+<row id="83" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_w" title="РЕПО с ЦК с КСУ 7 дн. - безадрес." is_default="0" board_group_id="83" is_traded="1"/>
+<row id="80" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_2w" title="РЕПО с ЦК с КСУ 14 дн. - безадрес." is_default="0" board_group_id="80" is_traded="1"/>
+<row id="84" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_m" title="РЕПО с ЦК с КСУ 1 месяц - безадрес." is_default="0" board_group_id="84" is_traded="1"/>
+<row id="81" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_2m" title="РЕПО с ЦК с КСУ 2 месяца - безадрес." is_default="0" board_group_id="81" is_traded="1"/>
+<row id="85" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_3m" title="РЕПО с ЦК с КСУ 3 месяца - безадрес." is_default="0" board_group_id="85" is_traded="1"/>
+<row id="103" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_6m" title="РЕПО с ЦК с КСУ 6 мес. - безадрес." is_default="0" board_group_id="103" is_traded="1"/>
+<row id="102" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_1y" title="РЕПО с ЦК с КСУ 1 год - безадрес." is_default="0" board_group_id="102" is_traded="1"/>
+<row id="82" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_ndm" title="РЕПО с ЦК с КСУ - адрес." is_default="0" board_group_id="82" is_traded="1"/>
+<row id="111" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_d_usd" title="РЕПО с ЦК с КСУ 1 день (USD) - безадрес." is_default="0" board_group_id="111" is_traded="1"/>
+<row id="112" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_w_usd" title="РЕПО с ЦК с КСУ 7 дн. (USD) - безадрес." is_default="0" board_group_id="112" is_traded="1"/>
+<row id="113" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_2w_usd" title="РЕПО с ЦК с КСУ 14 дн. (USD) - безадрес." is_default="0" board_group_id="113" is_traded="1"/>
+<row id="114" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_m_usd" title="РЕПО с ЦК с КСУ 1 месяц (USD) - безадрес." is_default="0" board_group_id="114" is_traded="1"/>
+<row id="115" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_2m_usd" title="РЕПО с ЦК с КСУ 2 месяца (USD) - безадрес." is_default="0" board_group_id="115" is_traded="1"/>
+<row id="116" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_3m_usd" title="РЕПО с ЦК с КСУ 3 месяца (USD) - безадрес." is_default="0" board_group_id="116" is_traded="1"/>
+<row id="117" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_6m_usd" title="РЕПО с ЦК с КСУ 6 месяцев (USD) - безадрес." is_default="0" board_group_id="117" is_traded="1"/>
+<row id="118" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_1y_usd" title="РЕПО с ЦК с КСУ 1 год (USD) - безадрес." is_default="0" board_group_id="118" is_traded="1"/>
+<row id="119" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_ndm_usd" title="РЕПО с ЦК с КСУ (USD) - адрес." is_default="0" board_group_id="119" is_traded="1"/>
+<row id="127" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_d_eur" title="РЕПО с ЦК с КСУ 1 день (EUR) - безадрес." is_default="0" board_group_id="127" is_traded="1"/>
+<row id="128" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_w_eur" title="РЕПО с ЦК с КСУ 7 дн. (EUR) - безадрес." is_default="0" board_group_id="128" is_traded="1"/>
+<row id="129" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_2w_eur" title="РЕПО с ЦК с КСУ 14 дн. (EUR) - безадрес." is_default="0" board_group_id="129" is_traded="1"/>
+<row id="130" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_m_eur" title="РЕПО с ЦК с КСУ 1 месяц (EUR) - безадрес." is_default="0" board_group_id="130" is_traded="1"/>
+<row id="131" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_2m_eur" title="РЕПО с ЦК с КСУ 2 месяца (EUR) - безадрес." is_default="0" board_group_id="131" is_traded="1"/>
+<row id="132" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_3m_eur" title="РЕПО с ЦК с КСУ 3 месяца (EUR) - безадрес." is_default="0" board_group_id="132" is_traded="1"/>
+<row id="133" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_6m_eur" title="РЕПО с ЦК с КСУ 6 месяцев (EUR) - безадрес." is_default="0" board_group_id="133" is_traded="1"/>
+<row id="134" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_1y_eur" title="РЕПО с ЦК с КСУ 1 год (EUR) - безадрес." is_default="0" board_group_id="134" is_traded="1"/>
+<row id="135" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_gcc_ndm_eur" title="РЕПО с ЦК с КСУ адресн.(EUR) - адрес." is_default="0" board_group_id="135" is_traded="1"/>
+<row id="169" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_d" title="Аукцион с ЦК 1 день - безадрес." is_default="0" board_group_id="169" is_traded="1"/>
+<row id="171" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_2" title="Аукцион с ЦК 1 неделя - безадрес." is_default="0" board_group_id="171" is_traded="1"/>
+<row id="173" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_2w" title="Аукцион с ЦК 2 недели - безадрес." is_default="0" board_group_id="173" is_traded="1"/>
+<row id="175" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_m" title="Аукцион с ЦК 1 месяц - безадрес." is_default="0" board_group_id="175" is_traded="1"/>
+<row id="177" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_2m" title="Аукцион с ЦК 2 месяца - безадрес." is_default="0" board_group_id="177" is_traded="1"/>
+<row id="179" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_3m" title="Аукцион с ЦК 3 месяца - безадрес." is_default="0" board_group_id="179" is_traded="1"/>
+<row id="181" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_6," title="Аукцион с ЦК 6 месяцев - безадрес." is_default="0" board_group_id="181" is_traded="1"/>
+<row id="183" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_fk_1y" title="Аукцион с ЦК 1 год - безадрес." is_default="0" board_group_id="183" is_traded="1"/>
+<row id="187" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_9m" title="РЕПО с ЦК с КСУ 9 месяцев - безадрес." is_default="0" board_group_id="187" is_traded="1"/>
+<row id="189" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_9m_usd" title="РЕПО с ЦК с КСУ 9 мес. (USD) - безадрес." is_default="0" board_group_id="189" is_traded="1"/>
+<row id="191" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="27" market_name="ccp" name="stock_ccp_9m_eur" title="РЕПО с ЦК с КСУ 9 мес. (EUR) - безадрес." is_default="0" board_group_id="191" is_traded="1"/>
+<row id="97" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_order" title="Депозиты с ЦК - безадрес." is_default="1" board_group_id="97" is_traded="1"/>
+<row id="98" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_off_order" title="Депозиты с ЦК - адрес." is_default="0" board_group_id="98" is_traded="1"/>
+<row id="109" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_off_order_usd" title="Депозиты с ЦК (USD) - адрес." is_default="0" board_group_id="109" is_traded="1"/>
+<row id="136" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_off_order_eur" title="Депозиты с ЦК (EUR) - адрес." is_default="0" board_group_id="136" is_traded="1"/>
+<row id="110" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_order_usd" title="Депозиты с ЦК (USD) - безадрес." is_default="0" board_group_id="110" is_traded="1"/>
+<row id="137" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_order_eur" title="Депозиты с ЦК (EUR) - безадрес." is_default="0" board_group_id="137" is_traded="1"/>
+<row id="185" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="35" market_name="deposit" name="stock_deposit_close_auct" title="Депозиты с ЦК - Аукцион" is_default="0" board_group_id="185" is_traded="1"/>
+<row id="201" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_repo_interdealer_m" title="РЕПО-М - адрес." is_default="0" board_group_id="201" is_traded="1"/>
+<row id="1" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_shares_repo" title="РЕПО с акциями - адрес." is_default="1" board_group_id="1" is_traded="0"/>
+<row id="95" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_repo_interdealer_rub" title="Междилерское РЕПО (RUB) - адрес." is_default="0" board_group_id="95" is_traded="1"/>
+<row id="94" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_repo_interdealer_usd" title="Междилерское РЕПО (USD) - адрес." is_default="0" board_group_id="94" is_traded="1"/>
+<row id="90" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_repo_interdealer_eur" title="Междилерское РЕПО (EUR) - адрес." is_default="0" board_group_id="90" is_traded="1"/>
+<row id="2" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_bond_repo" title="РЕПО с облигациями - адрес." is_default="0" board_group_id="2" is_traded="0"/>
+<row id="31" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="3" market_name="repo" name="stock_repo_cc" title="ЦК - РЕПО - адрес." is_default="0" board_group_id="31" is_traded="0"/>
+<row id="63" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="28" market_name="qnv" name="stock_qnv_tplus" title="Т+: Для квал. инвесторов - безадрес." is_default="1" board_group_id="63" is_traded="1"/>
+<row id="60" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="28" market_name="qnv" name="stock_qnv_main" title="Т0: Квал. инвесторы - безадрес." is_default="0" board_group_id="60" is_traded="1"/>
+<row id="61" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="28" market_name="qnv" name="stock_qnv_ndm" title="РПС: Для квал. инвесторов - адрес." is_default="0" board_group_id="61" is_traded="1"/>
+<row id="64" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="28" market_name="qnv" name="stock_qnv_ndm_tplus" title="РПС с ЦК: Для квал. инвесторов - адрес." is_default="0" board_group_id="64" is_traded="1"/>
+<row id="62" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="28" market_name="qnv" name="stock_qnv_repo" title="РЕПО: Для квал. инвесторов - адрес." is_default="0" board_group_id="62" is_traded="0"/>
+<row id="87" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="28" market_name="qnv" name="stock_qnv_tplus_usd" title="Т+: Для квал. инвесторов (USD) - безадрес." is_default="0" board_group_id="87" is_traded="1"/>
+<row id="120" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="36" market_name="mamc" name="stock_mamc_liq" title="Безадресные сделки с ЦК" is_default="1" board_group_id="120" is_traded="1"/>
+<row id="72" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="33" market_name="moexboard" name="stock_moexboard" title="MOEX Board" is_default="1" board_group_id="72" is_traded="1"/>
+<row id="36" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="23" market_name="standard" name="stock_standard" title="Standard - безадрес." is_default="1" board_group_id="36" is_traded="0"/>
+<row id="41" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="23" market_name="standard" name="standard_ndm" title="Standard - адрес." is_default="0" board_group_id="41" is_traded="0"/>
+<row id="40" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="23" market_name="standard" name="stock_standard_repo" title="Standard: РЕПО - адрес." is_default="0" board_group_id="40" is_traded="0"/>
+<row id="43" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="25" market_name="classica" name="stock_classica" title="Classica - безадрес." is_default="1" board_group_id="43" is_traded="0"/>
+<row id="44" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" market_id="25" market_name="classica" name="stock_classica_ndm" title="Classica - адрес." is_default="0" board_group_id="44" is_traded="0"/>
+<row id="12" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_id="9" market_name="index" name="state_index" title="Индексы ГКО/ОФЗ" is_default="1" board_group_id="12" is_traded="0"/>
+<row id="10" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_id="6" market_name="bonds" name="state" title="Основной режим" is_default="1" board_group_id="10" is_traded="0"/>
+<row id="3" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_id="7" market_name="repo" name="dealer_dealer" title="Сделки междилерского РЕПО" is_default="1" board_group_id="3" is_traded="0"/>
+<row id="11" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" market_id="8" market_name="ndm" name="state_ndm" title="Внесистемные сделки" is_default="1" board_group_id="11" is_traded="0"/>
+<row id="26" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="21" market_name="basket" name="BKT" title="Бивалютная корзина" is_default="1" board_group_id="26" is_traded="1"/>
+<row id="13" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency" title="Системные сделки - безадрес." is_default="1" board_group_id="13" is_traded="1"/>
+<row id="46" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_ndm" title="Внесистемные сделки - адрес." is_default="0" board_group_id="46" is_traded="1"/>
+<row id="151" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_selt_licu" title="Внесистемные сделки урегулирования - безадрес." is_default="0" board_group_id="151" is_traded="1"/>
+<row id="100" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_fixing" title="Фиксинг системный - безадрес." is_default="0" board_group_id="100" is_traded="1"/>
+<row id="101" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_fixing_ndm" title="Фиксинг внесистемный - адрес." is_default="0" board_group_id="101" is_traded="1"/>
+<row id="149" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_selt_waps" title="Системные средневзвешенные - безадрес." is_default="0" board_group_id="149" is_traded="1"/>
+<row id="150" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_selt_wapn" title="Внесистемные средневзвешенные - адрес." is_default="0" board_group_id="150" is_traded="1"/>
+<row id="140" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="10" market_name="selt" name="currency_selt_settle" title="Поставка" is_default="0" board_group_id="140" is_traded="1"/>
+<row id="88" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="34" market_name="futures" name="currency_futures" title="Системные фьючерсные контракты  - безадрес." is_default="1" board_group_id="88" is_traded="1"/>
+<row id="89" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="34" market_name="futures" name="currency_futures_ndm" title="Внесистемные фьючерсные контракты - адрес." is_default="0" board_group_id="89" is_traded="1"/>
+<row id="165" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" market_id="41" market_name="index" name="currency_index" title="Валютный фиксинг" is_default="1" board_group_id="165" is_traded="1"/>
+<row id="15" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_id="12" market_name="main" name="futures" title="Срочные инструменты" is_default="1" board_group_id="15" is_traded="0"/>
+<row id="45" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_id="22" market_name="forts" name="futures_forts" title="Фьючерсы" is_default="1" board_group_id="45" is_traded="1"/>
+<row id="35" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_id="24" market_name="options" name="futures_options" title="Опционы" is_default="1" board_group_id="35" is_traded="1"/>
+<row id="138" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_id="37" market_name="fortsiqs" name="futures_fortsiqs" title="Фьючерсы IQS" is_default="1" board_group_id="138" is_traded="1"/>
+<row id="139" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" market_id="38" market_name="optionsiqs" name="futures_optionsiqs" title="Опционы IQS" is_default="1" board_group_id="139" is_traded="1"/>
+<row id="20" trade_engine_id="5" trade_engine_name="commodity" trade_engine_title="Товарный рынок" market_id="18" market_name="futures" name="commodity_futures" title="Стандартные контракты АО НТБ" is_default="1" board_group_id="20" is_traded="0"/>
+<row id="29" trade_engine_id="6" trade_engine_name="interventions" trade_engine_title="Товарные интервенции" market_id="20" market_name="grain" name="sell_grain" title="Интервенции по продаже зерна" is_default="0" board_group_id="29" is_traded="1"/>
+<row id="24" trade_engine_id="6" trade_engine_name="interventions" trade_engine_title="Товарные интервенции" market_id="20" market_name="grain" name="interventions_grain" title="Интервенции по продаже зерна" is_default="1" board_group_id="24" is_traded="1"/>
+<row id="141" trade_engine_id="7" trade_engine_name="offboard" trade_engine_title="ОТС-система" market_id="39" market_name="bonds" name="offboard_bond_all" title="ОТС-система: облигации" is_default="1" board_group_id="141" is_traded="1"/>
+</rows>
+</data>
+<data id="durations">
+<metadata>
+<columns>
+<column name="interval" type="int32"/>
+<column name="duration" type="int32"/>
+<column name="days" type="int32"/>
+<column name="title" type="string" bytes="765" max_size="0"/>
+<column name="hint" type="string" bytes="765" max_size="0"/>
+</columns>
+</metadata>
+<rows>
+<row interval="1" duration="60" days="" title="минута" hint="1м"/>
+<row interval="10" duration="600" days="" title="10 минут" hint="10м"/>
+<row interval="60" duration="3600" days="" title="час" hint="1ч"/>
+<row interval="24" duration="86400" days="" title="день" hint="1д"/>
+<row interval="7" duration="604800" days="" title="неделя" hint="1н"/>
+<row interval="31" duration="2678400" days="" title="месяц" hint="1М"/>
+<row interval="4" duration="8035200" days="" title="квартал" hint="1К"/>
+</rows>
+</data>
+<data id="securitytypes">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="trade_engine_id" type="int32"/>
+<column name="trade_engine_name" type="string" bytes="45" max_size="0"/>
+<column name="trade_engine_title" type="string" bytes="765" max_size="0"/>
+<column name="security_type_name" type="string" bytes="93" max_size="0"/>
+<column name="security_type_title" type="string" bytes="765" max_size="0"/>
+</columns>
+</metadata>
+<rows>
+<row id="3" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="common_share" security_type_title="Акция обыкновенная"/>
+<row id="1" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="preferred_share" security_type_title="Акция привилегированная "/>
+<row id="51" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="depositary_receipt" security_type_title="Депозитарная расписка"/>
+<row id="54" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="ofz_bond" security_type_title="ОФЗ"/>
+<row id="4" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="cb_bond" security_type_title="Облигация центрального банка"/>
+<row id="41" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="subfederal_bond" security_type_title="Региональная облигация"/>
+<row id="45" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="municipal_bond" security_type_title="Муниципальная облигация"/>
+<row id="2" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="corporate_bond" security_type_title="Корпоративная облигация"/>
+<row id="43" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="exchange_bond" security_type_title="Биржевая облигация"/>
+<row id="42" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="ifi_bond" security_type_title="Облигация МФО"/>
+<row id="60" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="euro_bond" security_type_title="Еврооблигации"/>
+<row id="7" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="public_ppif" security_type_title="Пай открытого ПИФа"/>
+<row id="8" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="interval_ppif" security_type_title="Пай интервального ПИФа"/>
+<row id="53" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="rts_index" security_type_title="Индекс РТС"/>
+<row id="9" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="private_ppif" security_type_title="Пай закрытого ПИФа"/>
+<row id="57" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="stock_mortgage" security_type_title="Ипотечный сертификат"/>
+<row id="55" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="etf_ppif" security_type_title="ETF"/>
+<row id="44" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="stock_index" security_type_title="Индекс фондового рынка"/>
+<row id="61" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="gcc" security_type_title="Клиринговый сертификат участия"/>
+<row id="74" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="exchange_ppif" security_type_title="Пай биржевого ПИФа"/>
+<row id="63" trade_engine_id="1" trade_engine_name="stock" trade_engine_title="Фондовый рынок и рынок депозитов" security_type_name="stock_deposit" security_type_title="Депозит с ЦК"/>
+<row id="46" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" security_type_name="state_index" security_type_title="Индекс ГЦБ"/>
+<row id="10" trade_engine_id="2" trade_engine_name="state" trade_engine_title="Рынок ГЦБ (размещение)" security_type_name="state_bond" security_type_title="Государственная облигация"/>
+<row id="75" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="currency_index" security_type_title="Валютный фиксинг"/>
+<row id="5" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="currency" security_type_title="Валюта"/>
+<row id="50" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="currency_basket" security_type_title="Бивалютная корзина"/>
+<row id="58" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="gold_metal" security_type_title="Металл золото"/>
+<row id="59" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="silver_metal" security_type_title="Металл серебро"/>
+<row id="62" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="currency_futures" security_type_title="Валютный фьючерс"/>
+<row id="73" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="currency_fixing" security_type_title="Валютный фиксинг"/>
+<row id="76" trade_engine_id="3" trade_engine_name="currency" trade_engine_title="Валютный рынок" security_type_name="currency_wap" security_type_title="Средневзвешенный курс"/>
+<row id="6" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" security_type_name="futures" security_type_title="Фьючерс"/>
+<row id="52" trade_engine_id="4" trade_engine_name="futures" trade_engine_title="Срочный рынок" security_type_name="option" security_type_title="Опцион"/>
+<row id="48" trade_engine_id="5" trade_engine_name="commodity" trade_engine_title="Товарный рынок" security_type_name="commodity_futures" security_type_title="Стандартный контракт АО НТБ"/>
+<row id="49" trade_engine_id="6" trade_engine_name="interventions" trade_engine_title="Товарные интервенции" security_type_name="commodity_intervention" security_type_title="Аукцион товарной интервенции"/>
+</rows>
+</data>
+<data id="securitygroups">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="name" type="string" bytes="93" max_size="0"/>
+<column name="title" type="string" bytes="765" max_size="0"/>
+<column name="is_hidden" type="int32"/>
+</columns>
+</metadata>
+<rows>
+<row id="12" name="stock_index" title="Индексы" is_hidden="0"/>
+<row id="4" name="stock_shares" title="Акции" is_hidden="0"/>
+<row id="3" name="stock_bonds" title="Облигации" is_hidden="0"/>
+<row id="9" name="currency_selt" title="Валюта" is_hidden="0"/>
+<row id="10" name="futures_forts" title="Фьючерсы" is_hidden="0"/>
+<row id="26" name="futures_options" title="Опционы" is_hidden="0"/>
+<row id="18" name="stock_dr" title="Депозитарные расписки" is_hidden="0"/>
+<row id="6" name="stock_eurobond" title="Еврооблигации" is_hidden="0"/>
+<row id="5" name="stock_ppif" title="Паи ПИФов" is_hidden="0"/>
+<row id="20" name="stock_etf" title="Биржевые фонды" is_hidden="0"/>
+<row id="24" name="currency_metal" title="Драгоценные металлы" is_hidden="0"/>
+<row id="21" name="stock_qnv" title="Квал. инвесторы" is_hidden="0"/>
+<row id="27" name="stock_gcc" title="Клиринговые сертификаты участия" is_hidden="0"/>
+<row id="29" name="stock_deposit" title="Депозиты с ЦК" is_hidden="0"/>
+<row id="17" name="currency_basket" title="Бивалютная корзина" is_hidden="1"/>
+<row id="28" name="currency_futures" title="Валютный фьючерс" is_hidden="0"/>
+<row id="31" name="currency_indices" title="Валютные фиксинги" is_hidden="0"/>
+</rows>
+</data>
+<data id="securitycollections">
+<metadata>
+<columns>
+<column name="id" type="int32"/>
+<column name="name" type="string" bytes="96" max_size="0"/>
+<column name="title" type="string" bytes="765" max_size="0"/>
+<column name="security_group_id" type="int32"/>
+</columns>
+</metadata>
+<rows>
+<row id="72" name="stock_index_all" title="Все индексы" security_group_id="12"/>
+<row id="213" name="stock_index_shares" title="Основные индексы акций" security_group_id="12"/>
+<row id="210" name="stock_index_shares_sectoral" title="Отраслевые индексы акций" security_group_id="12"/>
+<row id="249" name="stock_index_total_return" title="Индексы акций полной доходности" security_group_id="12"/>
+<row id="211" name="stock_index_shares_thematic" title="Тематические индексы акций" security_group_id="12"/>
+<row id="207" name="stock_index_bonds" title="Основные индексы облигаций" security_group_id="12"/>
+<row id="214" name="stock_index_bonds_state" title="Индексы государственных облигаций" security_group_id="12"/>
+<row id="208" name="stock_index_bonds_corporate" title="Индексы корпоративных облигаций" security_group_id="12"/>
+<row id="212" name="stock_index_bonds_municipal" title="Индексы муниципальных облигаций" security_group_id="12"/>
+<row id="209" name="stock_index_bonds_retiring" title="Индексы активов пенсионных накоплений" security_group_id="12"/>
+<row id="215" name="stock_index_volatility" title="Российские индексы волатильности" security_group_id="12"/>
+<row id="259" name="stock_index_inav" title="INAV" security_group_id="12"/>
+<row id="115" name="stock_index_repo" title="Индикаторы ставок РЕПО" security_group_id="12"/>
+<row id="295" name="stock_index_mmix" title="Money market index" security_group_id="12"/>
+<row id="229" name="stock_index_quotationlist_bond" title="Облигационные индексы котировальных листов" security_group_id="12"/>
+<row id="3" name="stock_shares_all" title="Все акции" security_group_id="4"/>
+<row id="160" name="stock_shares_one" title="Уровень 1" security_group_id="4"/>
+<row id="161" name="stock_shares_two" title="Уровень 2" security_group_id="4"/>
+<row id="162" name="stock_shares_three" title="Уровень 3" security_group_id="4"/>
+<row id="7" name="stock_bonds_all" title="Все" security_group_id="3"/>
+<row id="163" name="stock_bonds_one" title="Все уровень 1" security_group_id="3"/>
+<row id="164" name="stock_bonds_two" title="Все уровень 2" security_group_id="3"/>
+<row id="165" name="stock_bonds_three" title="Все уровень 3" security_group_id="3"/>
+<row id="189" name="stock_bonds_corp_all" title="Все корпоративные" security_group_id="3"/>
+<row id="202" name="stock_bonds_corp_one" title="Корпоративные уровень 1" security_group_id="3"/>
+<row id="194" name="stock_bonds_corp_two" title="Корпоративные уровень 2" security_group_id="3"/>
+<row id="188" name="stock_bonds_corp_three" title="Корпоративные уровень 3" security_group_id="3"/>
+<row id="200" name="stock_bonds_exchange_all" title="Все биржевые" security_group_id="3"/>
+<row id="185" name="stock_exchange_corp_one" title="Биржевые уровень 1" security_group_id="3"/>
+<row id="195" name="stock_bonds_exchange_two" title="Биржевые уровень 2" security_group_id="3"/>
+<row id="190" name="stock_bonds_exchange_three" title="Биржевые уровень 3" security_group_id="3"/>
+<row id="205" name="stock_bonds_municipal_all" title="Все муниципальные" security_group_id="3"/>
+<row id="201" name="stock_bonds_municipal_one" title="Муниципальные уровень 1" security_group_id="3"/>
+<row id="191" name="stock_bonds_municipal_two" title="Муниципальные уровень 2" security_group_id="3"/>
+<row id="203" name="stock_bonds_municipal_three" title="Муниципальные уровень 3" security_group_id="3"/>
+<row id="198" name="stock_bonds_subfederal_all" title="Все субъектов РФ" security_group_id="3"/>
+<row id="206" name="stock_bonds_subfederal_one" title="Субъектов РФ уровень 1" security_group_id="3"/>
+<row id="204" name="stock_bonds_subfederal_two" title="Субъектов РФ уровень 2" security_group_id="3"/>
+<row id="192" name="stock_bonds_subfederal_three" title="Субъектов РФ уровень 3" security_group_id="3"/>
+<row id="186" name="stock_bonds_ofz_all" title="Все ОФЗ" security_group_id="3"/>
+<row id="193" name="stock_bonds_cb_all" title="Все Банка России" security_group_id="3"/>
+<row id="197" name="stock_bonds_ifi_all" title="Все иностранных эмитентов" security_group_id="3"/>
+<row id="199" name="stock_bonds_ifi_one" title="Иностранных эмитентов уровень 1" security_group_id="3"/>
+<row id="187" name="stock_bonds_ifi_two" title="Иностранных эмитентов уровень 2" security_group_id="3"/>
+<row id="196" name="stock_bonds_ifi_three" title="Иностранных эмитентов уровень 3" security_group_id="3"/>
+<row id="177" name="currency_selt_all_spot" title="Все валюты СПОТ" security_group_id="9"/>
+<row id="170" name="currency_selt_all_swap" title="Все валюты СВОП" security_group_id="9"/>
+<row id="173" name="currency_selt_usd_spot" title="USD/RUB СПОТ" security_group_id="9"/>
+<row id="174" name="currency_selt_usd_swap" title="USD/RUB СВОП" security_group_id="9"/>
+<row id="172" name="currency_selt_eur_spot" title="EUR/RUB СПОТ" security_group_id="9"/>
+<row id="179" name="currency_selt_eur_swap" title="EUR/RUB СВОП" security_group_id="9"/>
+<row id="181" name="currency_selt_cny_spot" title="CNY/RUB СПОТ" security_group_id="9"/>
+<row id="176" name="currency_selt_cny_swap" title="CNY/RUB СВОП" security_group_id="9"/>
+<row id="178" name="currency_selt_eurusd_spot" title="EUR/USD СПОТ" security_group_id="9"/>
+<row id="180" name="currency_selt_eurusd_swap" title="EUR/USD СВОП" security_group_id="9"/>
+<row id="171" name="currency_selt_other_spot" title="Другие валюты СПОТ" security_group_id="9"/>
+<row id="175" name="currency_selt_other_swap" title="Другие валюты СВОП" security_group_id="9"/>
+<row id="227" name="futures_forts_all" title="Все фьючерсы" security_group_id="10"/>
+<row id="226" name="futures_forts_index" title="Фьючерсы на индексы" security_group_id="10"/>
+<row id="224" name="futures_forts_shares" title="Фьючерсы на акции" security_group_id="10"/>
+<row id="225" name="futures_forts_currency" title="Фьючерсы на валюты" security_group_id="10"/>
+<row id="228" name="futures_forts_interest" title="Фьючерсы на процентные ставки" security_group_id="10"/>
+<row id="223" name="futures_forts_commodity" title="Фьючерсы на товарные контракты" security_group_id="10"/>
+<row id="260" name="futures_forts_ofz" title="Фьючерсы на ОФЗ" security_group_id="10"/>
+<row id="218" name="futures_options_all" title="Все опционы" security_group_id="26"/>
+<row id="222" name="futures_options_index" title="Опционы ф. на индекс" security_group_id="26"/>
+<row id="221" name="futures_options_shares" title="Опционы ф. на акции" security_group_id="26"/>
+<row id="220" name="futures_options_currency" title="Опционы ф. на валюты" security_group_id="26"/>
+<row id="219" name="futures_options_commodity" title="Опционы ф. на товарные контракты" security_group_id="26"/>
+<row id="130" name="stock_dr_all" title="Все ДР" security_group_id="18"/>
+<row id="60" name="stock_eurobond_all" title="Все" security_group_id="6"/>
+<row id="184" name="stock_eurobond_one" title="Уровень 1" security_group_id="6"/>
+<row id="182" name="stock_eurobond_two" title="Уровень 2" security_group_id="6"/>
+<row id="183" name="stock_eurobond_three" title="Уровень 3" security_group_id="6"/>
+<row id="59" name="stock_ppif_all" title="Все ПИФы" security_group_id="5"/>
+<row id="166" name="stock_ppif_one" title="Уровень 1" security_group_id="5"/>
+<row id="167" name="stock_ppif_two" title="Уровень 2" security_group_id="5"/>
+<row id="168" name="stock_ppif_three" title="Уровень 3" security_group_id="5"/>
+<row id="151" name="stock_etf_all" title="Все паи иностранных фондов" security_group_id="20"/>
+<row id="216" name="currency_metal_gold" title="Золото" security_group_id="24"/>
+<row id="217" name="currency_metal_silver" title="Серебро" security_group_id="24"/>
+<row id="152" name="stock_qnv_all" title="Все квал. инвесторы" security_group_id="21"/>
+<row id="230" name="stock_gcc_all" title="Клиринговые сертификаты участия" security_group_id="27"/>
+<row id="258" name="stock_deposit_all" title="Депозиты с ЦК" security_group_id="29"/>
+<row id="116" name="currency_basket_all" title="Бивалютная корзина" security_group_id="17"/>
+<row id="286" name="currency_futures_swap_all" title="Все валюты поставочные СВОП КОНТРАКТЫ" security_group_id="28"/>
+<row id="254" name="currency_futures_delivery_all" title="Все валюты поставочные ФЬЮЧЕРСЫ" security_group_id="28"/>
+<row id="287" name="currency_futures_swap_usd" title="USD/RUB поставочный СВОП КОНТРАКТ" security_group_id="28"/>
+<row id="252" name="currency_futures_delivery_usd" title="USD/RUB поставочный ФЬЮЧЕРС" security_group_id="28"/>
+<row id="288" name="currency_futures_swap_eur" title="EUR/RUB поставочный СВОП КОНТРАКТ" security_group_id="28"/>
+<row id="255" name="currency_futures_delivery_eur" title="EUR/RUB поставочный ФЬЮЧЕРС" security_group_id="28"/>
+<row id="289" name="currency_futures_swap_cny" title="CNY/RUB поставочный СВОП КОНТРАКТ" security_group_id="28"/>
+<row id="250" name="currency_futures_delivery_cny" title="CNY/RUB поставочный ФЬЮЧЕРС" security_group_id="28"/>
+<row id="292" name="currency_futures_swap_other" title="Другие валюты поставочный СВОП КОНТРАКТ" security_group_id="28"/>
+<row id="293" name="currency_futures_delivery_others" title="Другие валюты поставочный ФЬЮЧЕРС" security_group_id="28"/>
+<row id="297" name="currency_indices_all" title="Все валютные фиксинги" security_group_id="31"/>
+</rows>
+</data>
+</document>
