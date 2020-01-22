@@ -1,0 +1,52 @@
+@startuml
+skinparam linetype ortho
+
+Title Structure DataBase for Share
+
+
+class Price{
+PK: ID: integer
+FK: companyID: string
+FK: timeID: int
+price:float
+}
+class Time{
+PK: ID: datetime
+}
+
+class Company{
+PK: ID:string,unique
+company: string,default=' '
+}
+
+
+class Share {
+PK, CPK: openID:int
+PK, CPK: closeID:int
+FK: intervalID:str
+high: float
+low: float
+volume: float
+value: float
+
+}
+
+note right: use as FK item for price \n for open and close Price
+
+class Interval{
+PK: ID:string
+}
+
+Price}|--|| Time
+Price }|--|| Company
+Price ||-|{ Share
+Price ||-|{ Share
+Interval ||--|{ Share
+
+note as N1
+PK - primary key
+FK - foreign key
+CPK - composite primary key
+end note
+
+@enduml

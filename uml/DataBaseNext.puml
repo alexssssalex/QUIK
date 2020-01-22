@@ -1,0 +1,58 @@
+@startuml
+skinparam linetype ortho
+
+
+
+class Price{
+company_id:string
+time_id:int
+price:float
+}
+
+class Company{
+*{field}tag:string(5),unique
+{field}description:string,default=' ')
+}
+
+class Interval{
+id:int
+str:string
+}
+
+class Time{
+id:int
+datetime:datetime
+}
+
+class Share {
+*company_tag:string
+*interval_id:int
+*time_start_id:int
+min:float
+max:float
+volume:float
+}
+
+class User{
+id:int
+name:string
+}
+
+class History{
+data
+user
+
+
+}
+
+
+
+
+Price }|-|| Time
+Share }|-|| Time
+Price }|-|| Company
+Share }|--|| Interval
+Share }|--|| Company
+
+
+@enduml

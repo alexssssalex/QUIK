@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+title Use cases (version 1)
+
+actor Developer
+actor User
+
+usecase DC1 as " fill database
+for COMPANY from
+DATE1 to DATE2"
+
+usecase UC1 as "get share
+for COMPANY from
+DATE1 to DATE2
+with INTERVAL"
+
+usecase UC2 as " get current
+PRICE for
+COMPANY"
+
+usecase UC3 as " get current
+PRICE for
+all COMPANY"
+
+Developer --> DC1
+
+
+User-->UC1
+User-->UC2
+User-->UC3
+
+
+
+@enduml

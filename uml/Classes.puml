@@ -1,0 +1,30 @@
+@startuml
+
+title Structure
+
+class Manager{
+put(DataFrame)
+get_company()
+get_price(time,company)
+get_share(company,time1,time2,interval)
+}
+
+class Base {
+}
+class Company
+class Interval
+class Prise
+class Share
+class Time
+
+Manager *- Base
+
+
+Base <|-- Company
+Base <|-- Interval
+Base <|-- Prise
+Base <|-- Share
+Base <|-- Time
+
+
+@enduml
