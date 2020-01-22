@@ -42,6 +42,7 @@ class Manager:
     def __init__(self):
         self.engine = create_engine(DATABASE)
         Base.metadata.create_all(self.engine)
+        self.connection = self.engine.connect()
         self.session = sessionmaker(bind=self.engine)()
         insp = inspect(self.engine)
         self.pr_k = {x: insp.get_primary_keys(x) for x in insp.get_table_names()}
@@ -125,14 +126,15 @@ class Manager:
                            sep=';', encoding='windows-1251', engine='python',
                            skiprows=2)
 
-    def _put_record(self, rec, primary_key=True, foreign_key=False):
-        """
-         * put record in database;
-         * flash and return point on it from database(if record already in data base return it)
 
-        :param class rec:
-        :return: record point on inserted record from data base
-        :rtype: Callable
+    def _get_id(self, rec, primary_key=True, foreign_key=False):
+        """
+        method return recort from data base if it is else None
+        :param rec:
+        :param primary_key:
+        :param foreign_key:
+        :return:
+        :rtype:
         """
         cls = rec.__class__
         flt = self.session.query(cls)
@@ -144,13 +146,25 @@ class Manager:
             for name in self.fr_k[rec.__tablename__]:
                 flt = flt.filter(getattr(cls, name) == getattr(rec, name))
         # </editor-fold>
-        id = flt.first()
-        if id is not None:
-            return id
-        else:
-            self.session.add(rec)
-            self.session.flush()
-            return rec
+        return flt.first()
+
+    def _put_record(self, recs, primary_key=True, foreign_key=False):
+        """
+         * put records in database;
+         * flash and return list of records point on it from database(if record already in data base return it)
+
+        :param class recs:
+        :return: record point on inserted record from data base
+        :rtype: Callable
+        """
+        for i in range(len(recs)):
+            id = self._get_id(recs[i], primary_key, foreign_key)
+            if id is None:
+                self.session.add(recs[i])
+            else:
+                recs[i]=id
+        self.session.flush()
+        return recs
 
     def _put_df(self, data):
         """
@@ -171,16 +185,21 @@ class Manager:
             return False
         # </editor-fold>
         try:
-            for d in data.to_dict('index').values():
-                company = self._put_record(Company(ID=d['ID'], company=d['company']))
-                interval = self._put_record(Interval(ID=d['interval']))
-                start = self._put_record(Time(ID=d['begin']))
-                end = self._put_record(Time(ID=d['end']))
-                open = self._put_record(Price(companyID=company.ID, timeID=start.ID, price=d['open']), primary_key=False, foreign_key=True)
-                close = self._put_record(Price(companyID=company.ID, timeID=end.ID, price=d['close']), primary_key=False, foreign_key=True)
-                self._put_record(Share(openID=open.ID, closeID=close.ID, intervalID=interval.ID, high=d['high'], low=d['low'],
-                                       volume=d['volume'], value=d['value']))
-                self.session.commit()
+            d = data.to_dict('list')
+            company = self._put_record([Company(ID = id, company=comp) for id, comp in zip(d['ID'], d['company'])])
+            interval = self._put_record([Interval(ID=x) for x in d['interval']])
+            start = self._put_record([Time(ID=x) for x in d['begin']])
+            end = self._put_record([Time(ID=x) for x in d['end']])
+            open = self._put_record([Price(companyID=comp.ID, timeID=t.ID, price=pr)
+                                     for comp,t, pr in zip(company,start,d['open'])],
+                                    primary_key=False, foreign_key=True)
+            close = self._put_record([Price(companyID=comp.ID, timeID=t.ID, price=pr)
+                                     for comp,t, pr in zip(company,end,d['close'])],
+                                    primary_key=False, foreign_key=True)
+            self._put_record([Share(openID=o.ID, closeID=c.ID, intervalID=i.ID, high=h, low=l,
+                      volume=v, value=value) for o,c,i, h,l,v, value in zip(open, close, interval,d['high'],
+                                                                            d['low'], d['volume'],d['value'] )])
+            self.session.commit()
             return True
         except Exception:
             self.session.rollback()
@@ -188,70 +207,110 @@ class Manager:
                sys.exc_info()[1], sys.exc_info()[2])))
             return False
 
-    def get(self, fields=list(), join=list(), filter=list()):
+    def get_company(self):
+        """
+        Get list company in database
+
+        :return:
+        :rtype: DataFrame
+        """
+        return self._get(fields = [Company.ID.label('SHORTNAMME'), Company.company.label('NAMME')])
+
+    def get_share(self, company, time1, time2, interval):
+        """
+        get share for company from tim11 to time2 with interval
+
+        :param str company: short name company
+        :param datetime time1: start time
+        :param datetime time2: end time
+        :param str interval: interval
+        :return:
+        :rtype: DataFrame
+        """
+        Price1 = aliased(Price)
+        return self._get(
+            fields=[Price.timeID.label('start'), Price1.timeID.label('end'), Share.low, Share.high,
+                    Share.volume, Share.value],
+                joins=[(Share, Share.openID==Price.ID),(Price1, Share.closeID==Price1.ID )],
+                filters=[(Price.timeID>time1),(Price.timeID<time2),(Price.companyID==company),(Share.intervalID==interval)],
+                order = Price.timeID)
+
+
+    def get_price(self,time, company=None):
+        """
+        Get price for all company or specific company
+
+        :param datetime time: time
+        :param str company:  short name company
+        :return:
+        :rtype: DataFrame
+        """
+        if company is None:
+            df=list()
+            for x in m.get_company()['SHORTNAMME']:
+                df.append(self._get(fields = [Price.timeID,Price.price,Price.companyID],
+                      filters = [(Price.timeID>=time),(Price.companyID==x)],
+                      order=Price.timeID,
+                      first=True))
+            return pd.concat(df)
+        else:
+            return self._get(fields=[Price.timeID, Price.price, Price.companyID],
+                      filters=[(Price.timeID >= time),(Price.companyID==company)],
+                      order=Price.timeID,
+                      first=True)
+
+    def _get(self, fields=list(), joins=list(), filters=list(), order = None , first=False):
         """
         Function for query from table
 
         Example self._get(Share, Share.min>10, Share.max<25)
         Price1 = aliased(Price)
-         m.get(fields=(Price.timeID.label('sasa'), Price1.timeID),
-                join=((Share,Share.openID==Price.ID),(Price1, Share.closeID==Price1.ID )),
-                filter=(Time.ID<datetime.datetime(2015,6,4,10,10),Time.ID>datetime.datetime(2015,6,4,10,1)))
+         m.get(fields=[Price.timeID.label('sasa'), Price1.timeID],
+                join=[(Share,Share.openID==Price.ID),(Price1, Share.closeID==Price1.ID )],
+                filter=[(Time.ID<datetime.datetime(2015,6,4,10,10)),(Time.ID>datetime.datetime(2015,6,4,10,1))],
+                order = Price,timeID)
 
         :param Callable table: class of table
         :param args: fillter expression like Share.min>10, Share.max<25
         :return:
         :rtype: DataFrame
         """
-        Price1 = aliased(Price)
         qw = self.session.query(*fields)
-        for x in join:
+        for x in joins:
             qw = qw.join(x)
-        for x in filter:
+        for x in filters:
             qw = qw.filter(x)
-        df = DataFrame(qw.all())
+        if order is not None:
+            qw = qw.order_by(order)
+        if first:
+            df = DataFrame([qw.first()])
+        else:
+            df = DataFrame(qw.all())
         return df
 
 
 if __name__ == '__main__':
     m = Manager()
-    # data1 = {
-    #     'description': ['ghgg', 'gggg'],
-    #     'company': ['SBER', 'SBER'],
-    #     'interval': ['1m', '1m'],
-    #     'open': [65.65, 66.17],
-    #     'close': [66.17, 66.31],
-    #     'high': [66.2, 66.48],
-    #     'low': [65.57, 66.09],
-    #     'volume': [2.58e8, 3.04e8],
-    #     'value': [3912130, 4586100],
-    #
-    #     'begin': [datetime.datetime(2015, 6, 4, 10), datetime.datetime(2015, 6, 4, 10,9)],
-    #     'end': [datetime.datetime(2015, 6, 4, 10,10), datetime.datetime(2025, 6, 4, 10,19)],
 
-    # }
-    # x = DataFrame(data1)
-    # # # # print(x[[True,False]])
-    # print(m.put(x))
-    # x = Time(id = d
-    # print(m.get(Company))
-    # print(DataFrame(m.session.query(Time.id, Share.begin_id, Company.company,Price).join(Company).join(Time, Time.id ==Share.begin_id).join(Price, Price.company_id==Company.id).filter(Share.company_id=='SBER').all()))
-    d1= aliased(Price)
-    qw = m.session.query(Company.ID)
-    # qw = qw.join(Price, Share.openID==Price.ID).join(d1,Share.closeID==d1.ID)
-    # qw = qw.filter(Price.companyID =='SBER').filter(Interval.ID =='1m')
-    #
-    # qw = qw.all()
     # Price1 = aliased(Price)
-    # print(m.get(fields=(Price.timeID.label('sasa'), Price1.timeID),
-    #             join=((Share,Share.openID==Price.ID),(Price1, Share.closeID==Price1.ID )),
-    #             filter=(Time.ID<datetime.datetime(2015,6,4,10,10),Time.ID>datetime.datetime(2015,6,4,10,1))))
-    #
-    # df =m.get_data('SBER','2019-12-02','10m')
-
-    # print(m.company[m.company['ID']=='SBER'])
-
-    #
+    # print(m.get(fields=(Price.timeID.label('time'), Price.companyID, Price.price),
+    #             filter=(Price.timeID>datetime(2020,1,16,11,0),Price.timeID<datetime(2020,1,16,11,4), Price.companyID=='SBER')))
+    # print(m.get(fields=(Price.timeID,Price.companyID,Share.high,Share.low,Share.value,Share.value,Price.price, Price1.price),
+    #             filter=(Price.timeID>datetime(2020,1,16,10,55),Price.timeID<datetime(2020,1,16,11,30), Price.companyID=='GAZP', Share.intervalID == '10m'),
+    #             join=((Share,Share.openID==Price.ID),(Price1,Share.closeID==Price1.ID))))
+    Price1 = aliased(Price)
+    # print(m.get(fields=[Share.high,Share.low, Price.timeID,  Price1.timeID, Price.price, Price1.price, Share.intervalID, Price.companyID],
+    #             joins=[(Price, Share.openID == Price.ID), (Price1, Share.closeID == Price1.ID)],
+    #             filters=[(Price.timeID>datetime(2018,1,5,10,55)),(Price.timeID<datetime(2019,1,5,10,55)),(Price.companyID=='GAZP')],
+    #             order = Price.timeID))
+    # for x in m.session.query(Price.ID, Price.timeID, Price.companyID).filter(Price.timeID>datetime(2020,1,20,10,55)).all():
+    #     print(x)
+    # m.connection.execute(setattr())
     # primaryKeyColName = table.primary_key.colum
-    for x in ['GAZP','SBER']:
-        m.put(x, '2018-01-01', '2020-01-20', '10m')
+    # for y in ['1d','1h','10m','1m']:
+    #     for x in ['SBER','GAZP']:
+    #         m.put(x, '2018-01-01', '2019-10-01', y)
+    # print(m.get_price(datetime(2018,10,5,11,2)))
+    # print(m.get_company())
+    print(m.get_share('SBER', datetime(2018,10,5,11,2),datetime(2018,10,15,11,2),'1d'))
+

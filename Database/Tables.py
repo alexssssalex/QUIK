@@ -19,7 +19,7 @@ class Company(Base):
     """
     __tablename__ = 'company'
 
-    ID = Column(String(), primary_key=True, unique=True)
+    ID = Column(String(), primary_key=True, index=True, unique=True)
     company = Column(String(), default='')
 
 
@@ -29,7 +29,7 @@ class Interval(Base):
     """
     __tablename__ = 'interval'
 
-    ID = Column(String(), primary_key=True, unique=True)
+    ID = Column(String(), primary_key=True, index=True, unique=True)
 
 
 class Time(Base):
@@ -37,7 +37,7 @@ class Time(Base):
     Company description.
     """
     __tablename__ = 'time'
-    ID = Column(DateTime(), primary_key=True, unique=True)
+    ID = Column(DateTime(), primary_key=True, unique=True, index=True)
 
 
 class Price(Base):
@@ -48,9 +48,9 @@ class Price(Base):
     # __table_args__ = (ForeignKeyConstraint(('company_id',), ['company.id']),
     #                   ForeignKeyConstraint(('time_id',), ['time.id']))
 
-    ID = Column(Integer(), primary_key=True)
-    companyID = Column(String(), ForeignKey('company.ID'))
-    timeID = Column(DateTime(), ForeignKey('time.ID'))
+    ID = Column(Integer(),index=True, primary_key=True)
+    companyID = Column(String(), ForeignKey('company.ID'),index=True,)
+    timeID = Column(DateTime(), ForeignKey('time.ID'),index=True,)
     price = Column(Float(), nullable=False)
 
 
@@ -63,9 +63,9 @@ class Share(Base):
                       ForeignKeyConstraint(('closeID',), ['price.ID']),
                       ForeignKeyConstraint(('intervalID',), ['interval.ID']))
 
-    openID = Column(Integer(), primary_key=True)
-    closeID = Column(Integer(), primary_key=True)
-    intervalID = Column(String())
+    openID = Column(Integer(),index=True, primary_key=True)
+    closeID = Column(Integer(),index=True, primary_key=True)
+    intervalID = Column(String(),index=True,)
     high = Column(Float())
     low = Column(Float())
     volume = Column(Float())
