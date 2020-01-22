@@ -1,0 +1,400 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Database.Manager &#8212; DataBase 0 documentation</title>
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script type="text/javascript" src="../../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">DataBase 0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for Database.Manager</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module response for interaction with database.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">Database.Tables</span> <span class="k">import</span> <span class="n">Company</span><span class="p">,</span> <span class="n">Share</span><span class="p">,</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">Price</span><span class="p">,</span> <span class="n">Time</span><span class="p">,</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="k">import</span> <span class="n">create_engine</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="k">import</span> <span class="n">sessionmaker</span><span class="p">,</span> <span class="n">aliased</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">config</span> <span class="k">import</span> <span class="n">LOG_FILE</span><span class="p">,</span> <span class="n">LOG_FILE_COUNT</span><span class="p">,</span> <span class="n">LOG_FILE_SIZE</span><span class="p">,</span> <span class="n">LOG_LEVEL</span><span class="p">,</span> <span class="n">DATABASE</span><span class="p">,</span> <span class="n">COMPANY</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">logging.handlers</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.inspection</span> <span class="k">import</span> <span class="n">inspect</span>
+
+<span class="c1"># &lt;editor-fold desc=&quot;Add logger&quot;&gt;</span>
+<span class="n">LOG_FILENAME</span> <span class="o">=</span> <span class="n">LOG_FILE</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">RotatingFileHandler</span><span class="p">(</span>
+    <span class="n">LOG_FILENAME</span><span class="p">,</span> <span class="n">maxBytes</span><span class="o">=</span><span class="n">LOG_FILE_SIZE</span><span class="p">,</span> <span class="n">backupCount</span><span class="o">=</span><span class="n">LOG_FILE_COUNT</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOG_LEVEL</span><span class="p">)</span>
+<span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> </span><span class="si">%(levelname)-10s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1"> - </span><span class="si">%(module)s</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+
+
+<span class="c1"># &lt;/editor-fold&gt;</span>
+
+
+<div class="viewcode-block" id="Manager"><a class="viewcode-back" href="../../modules.html#Database.Manager.Manager">[docs]</a><span class="k">class</span> <span class="nc">Manager</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class is manager of database:</span>
+
+<span class="sd">    * create session;</span>
+<span class="sd">    * give convinient method for frequency request:</span>
+<span class="sd">        - put DataFrame in database (if there was the same record - ignore them);</span>
+<span class="sd">        - get query from database as DataFrame;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">DATABASE</span><span class="p">)</span>
+        <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">create_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)()</span>
+        <span class="n">insp</span> <span class="o">=</span> <span class="n">inspect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pr_k</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">insp</span><span class="o">.</span><span class="n">get_primary_keys</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">insp</span><span class="o">.</span><span class="n">get_table_names</span><span class="p">()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fr_k</span> <span class="o">=</span><span class="nb">dict</span><span class="p">()</span>
+        <span class="c1"># &lt;editor-fold desc=&quot;Fill foreign key&quot;&gt;</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">insp</span><span class="o">.</span><span class="n">get_table_names</span><span class="p">():</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">insp</span><span class="o">.</span><span class="n">get_foreign_keys</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fr_k</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">fr_k</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="s1">&#39;constrained_columns&#39;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fr_k</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span>
+        <span class="c1"># &lt;/editor-fold&gt;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;1m&#39;</span><span class="p">:</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;10m&#39;</span><span class="p">:</span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="s1">&#39;1h&#39;</span><span class="p">:</span><span class="s1">&#39;60&#39;</span><span class="p">,</span><span class="s1">&#39;1d&#39;</span><span class="p">:</span><span class="s1">&#39;24&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">company</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">COMPANY</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;windows-1251&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)[[</span><span class="s1">&#39;SECID&#39;</span><span class="p">,</span><span class="s1">&#39;SECNAME&#39;</span><span class="p">]]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">company</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;company&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Manager.put"><a class="viewcode-back" href="../../modules.html#Database.Manager.Manager.put">[docs]</a>    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">date1</span><span class="p">,</span> <span class="n">date2</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Put data &#39;company&#39; with &#39;interval&#39; from &#39;data1&#39; to &#39;data2&#39; in database</span>
+
+<span class="sd">        :param str company: company secid</span>
+<span class="sd">        :param str interval: interval record (valid value &#39;1m&#39;&#39;10m&#39;&#39;1h&#39;&#39;1d&#39;)</span>
+<span class="sd">        :param str date1: data in format &#39;2015-09-22&#39;</span>
+<span class="sd">        :param str date2: data in format &#39;2015-09-22&#39;</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ser</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">company</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">company</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">company</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date1</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">),</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date2</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Data &quot;</span><span class="si">%s</span><span class="s1">  </span><span class="si">%s</span><span class="s1">  </span><span class="si">%s</span><span class="s1">&quot; is writing to database.Start&#39;</span><span class="p">,</span><span class="n">ser</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+            <span class="n">ser</span><span class="p">[</span><span class="s1">&#39;interval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">interval</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all_pages</span><span class="p">(</span><span class="n">ser</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">,</span> <span class="n">ser</span><span class="p">[</span><span class="s1">&#39;interval&#39;</span><span class="p">])</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_put_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Data &quot;</span><span class="si">%s</span><span class="s1">  </span><span class="si">%s</span><span class="s1">  </span><span class="si">%s</span><span class="s1">&quot; is writing to database.End&#39;</span><span class="p">,</span><span class="n">ser</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">_get_all_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        DataFrame with share</span>
+
+<span class="sd">        :param str company: company secid</span>
+<span class="sd">        :param date: data in format &#39;2015-09-22&#39;</span>
+<span class="sd">        :param str interval: interval record (valid value &#39;1m&#39;&#39;10m&#39;&#39;1h&#39;&#39;1d&#39;)</span>
+<span class="sd">        :return: DataFrame with data</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">dfx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_page</span><span class="p">(</span><span class="n">company</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">count</span> <span class="o">*</span> <span class="mi">500</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">dfx</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span><span class="n">dfx</span><span class="p">])</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;begin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;begin&#39;</span><span class="p">])</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">df</span>
+
+    <span class="k">def</span> <span class="nf">_get_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        * made urn;</span>
+<span class="sd">        * return page as DataFrame</span>
+
+<span class="sd">        :param str company: shortname company</span>
+<span class="sd">        :param str date: data in format like &#39;2017-12-01&#39;</span>
+<span class="sd">        :param str interval: interval record (valid value &#39;1m&#39;&#39;10m&#39;&#39;1h&#39;&#39;1d&#39;)</span>
+<span class="sd">        :param start: start record.data return by page with 500 record.</span>
+<span class="sd">                To get all we need call with start=0, start=500,...</span>
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://iss.moex.com/iss/engines/stock/markets/shares/boards/TQBR/securities/&#39;</span><span class="o">+</span>
+                           <span class="n">company</span><span class="o">+</span><span class="s1">&#39;/candles.csv?from=&#39;</span><span class="o">+</span><span class="n">date</span><span class="o">+</span><span class="s1">&#39;&amp;till=&#39;</span><span class="o">+</span><span class="n">date</span><span class="o">+</span><span class="s1">&#39;&amp;interval=&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">[</span><span class="n">interval</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;&amp;start=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">),</span>
+                           <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;windows-1251&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+                           <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">foreign_key</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        method return recort from data base if it is else None</span>
+<span class="sd">        :param rec:</span>
+<span class="sd">        :param primary_key:</span>
+<span class="sd">        :param foreign_key:</span>
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="vm">__class__</span>
+        <span class="n">flt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="c1"># &lt;editor-fold desc=&quot;check is it new values&quot;&gt;</span>
+        <span class="k">if</span> <span class="n">primary_key</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pr_k</span><span class="p">[</span><span class="n">rec</span><span class="o">.</span><span class="n">__tablename__</span><span class="p">]:</span>
+                <span class="n">flt</span> <span class="o">=</span> <span class="n">flt</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">foreign_key</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fr_k</span><span class="p">[</span><span class="n">rec</span><span class="o">.</span><span class="n">__tablename__</span><span class="p">]:</span>
+                <span class="n">flt</span> <span class="o">=</span> <span class="n">flt</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="c1"># &lt;/editor-fold&gt;</span>
+        <span class="k">return</span> <span class="n">flt</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_put_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recs</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">foreign_key</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">         * put records in database;</span>
+<span class="sd">         * flash and return list of records point on it from database(if record already in data base return it)</span>
+
+<span class="sd">        :param class recs:</span>
+<span class="sd">        :return: record point on inserted record from data base</span>
+<span class="sd">        :rtype: Callable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">)):</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_id</span><span class="p">(</span><span class="n">recs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">primary_key</span><span class="p">,</span> <span class="n">foreign_key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">recs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">recs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">recs</span>
+
+    <span class="k">def</span> <span class="nf">_put_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Put DataFrame data in data base (add only new data, if record already in database missed them)</span>
+
+<span class="sd">        :param DataFrame data: DataFrame must have columns &#39;open&#39;, &#39;close&#39;, &#39;high&#39;, &#39;low&#39;, &#39;value&#39;,</span>
+<span class="sd">            &#39;volume&#39;, &#39;begin&#39;, &#39;end&#39;, &#39;description&#39;,&#39;company&#39;</span>
+<span class="sd">        :return: if all OK return True</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># &lt;editor-fold desc=&quot;Check is &#39;data&#39; DataFrame&quot;&gt;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="ow">not</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">,</span> <span class="s1">&#39;begin&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;company&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error put data in data base. Data is not DataFrame or there are not all data&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># &lt;/editor-fold&gt;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+            <span class="n">company</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Company</span><span class="p">(</span><span class="n">ID</span> <span class="o">=</span> <span class="nb">id</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="n">comp</span><span class="p">)</span> <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;company&#39;</span><span class="p">])])</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Interval</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;interval&#39;</span><span class="p">]])</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Time</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;begin&#39;</span><span class="p">]])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Time</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;end&#39;</span><span class="p">]])</span>
+            <span class="nb">open</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Price</span><span class="p">(</span><span class="n">companyID</span><span class="o">=</span><span class="n">comp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">timeID</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">pr</span><span class="p">)</span>
+                                     <span class="k">for</span> <span class="n">comp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span> <span class="n">pr</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">company</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;open&#39;</span><span class="p">])],</span>
+                                    <span class="n">primary_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">foreign_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">close</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Price</span><span class="p">(</span><span class="n">companyID</span><span class="o">=</span><span class="n">comp</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">timeID</span><span class="o">=</span><span class="n">t</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">pr</span><span class="p">)</span>
+                                     <span class="k">for</span> <span class="n">comp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span> <span class="n">pr</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">company</span><span class="p">,</span><span class="n">end</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">])],</span>
+                                    <span class="n">primary_key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">foreign_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_put_record</span><span class="p">([</span><span class="n">Share</span><span class="p">(</span><span class="n">openID</span><span class="o">=</span><span class="n">o</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">closeID</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">intervalID</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">low</span><span class="o">=</span><span class="n">l</span><span class="p">,</span>
+                      <span class="n">volume</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">o</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">i</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">open</span><span class="p">,</span> <span class="n">close</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">],</span>
+                                                                            <span class="n">d</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;volume&#39;</span><span class="p">],</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="p">)])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Error put data in data base.&#39;</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span>
+               <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">])))</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="Manager.get_company"><a class="viewcode-back" href="../../modules.html#Database.Manager.Manager.get_company">[docs]</a>    <span class="k">def</span> <span class="nf">get_company</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list company in database</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">Company</span><span class="o">.</span><span class="n">ID</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;SHORTNAMME&#39;</span><span class="p">),</span> <span class="n">Company</span><span class="o">.</span><span class="n">company</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;NAMME&#39;</span><span class="p">)])</span></div>
+
+<div class="viewcode-block" id="Manager.get_share"><a class="viewcode-back" href="../../modules.html#Database.Manager.Manager.get_share">[docs]</a>    <span class="k">def</span> <span class="nf">get_share</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company</span><span class="p">,</span> <span class="n">time1</span><span class="p">,</span> <span class="n">time2</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get share for company from tim11 to time2 with interval</span>
+
+<span class="sd">        :param str company: short name company</span>
+<span class="sd">        :param datetime time1: start time</span>
+<span class="sd">        :param datetime time2: end time</span>
+<span class="sd">        :param str interval: interval</span>
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Price1</span> <span class="o">=</span> <span class="n">aliased</span><span class="p">(</span><span class="n">Price</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span>
+            <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">),</span> <span class="n">Price1</span><span class="o">.</span><span class="n">timeID</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">),</span> <span class="n">Share</span><span class="o">.</span><span class="n">low</span><span class="p">,</span> <span class="n">Share</span><span class="o">.</span><span class="n">high</span><span class="p">,</span>
+                    <span class="n">Share</span><span class="o">.</span><span class="n">volume</span><span class="p">,</span> <span class="n">Share</span><span class="o">.</span><span class="n">value</span><span class="p">],</span>
+                <span class="n">joins</span><span class="o">=</span><span class="p">[(</span><span class="n">Share</span><span class="p">,</span> <span class="n">Share</span><span class="o">.</span><span class="n">openID</span><span class="o">==</span><span class="n">Price</span><span class="o">.</span><span class="n">ID</span><span class="p">),(</span><span class="n">Price1</span><span class="p">,</span> <span class="n">Share</span><span class="o">.</span><span class="n">closeID</span><span class="o">==</span><span class="n">Price1</span><span class="o">.</span><span class="n">ID</span> <span class="p">)],</span>
+                <span class="n">filters</span><span class="o">=</span><span class="p">[(</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="o">&gt;</span><span class="n">time1</span><span class="p">),(</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="o">&lt;</span><span class="n">time2</span><span class="p">),(</span><span class="n">Price</span><span class="o">.</span><span class="n">companyID</span><span class="o">==</span><span class="n">company</span><span class="p">),(</span><span class="n">Share</span><span class="o">.</span><span class="n">intervalID</span><span class="o">==</span><span class="n">interval</span><span class="p">)],</span>
+                <span class="n">order</span> <span class="o">=</span> <span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Manager.get_price"><a class="viewcode-back" href="../../modules.html#Database.Manager.Manager.get_price">[docs]</a>    <span class="k">def</span> <span class="nf">get_price</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">time</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get price for all company or specific company</span>
+
+<span class="sd">        :param datetime time: time</span>
+<span class="sd">        :param str company:  short name company</span>
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">company</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">=</span><span class="nb">list</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">get_company</span><span class="p">()[</span><span class="s1">&#39;SHORTNAMME&#39;</span><span class="p">]:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="p">,</span><span class="n">Price</span><span class="o">.</span><span class="n">price</span><span class="p">,</span><span class="n">Price</span><span class="o">.</span><span class="n">companyID</span><span class="p">],</span>
+                      <span class="n">filters</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="o">&gt;=</span><span class="n">time</span><span class="p">),(</span><span class="n">Price</span><span class="o">.</span><span class="n">companyID</span><span class="o">==</span><span class="n">x</span><span class="p">)],</span>
+                      <span class="n">order</span><span class="o">=</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="p">,</span>
+                      <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="p">,</span> <span class="n">Price</span><span class="o">.</span><span class="n">price</span><span class="p">,</span> <span class="n">Price</span><span class="o">.</span><span class="n">companyID</span><span class="p">],</span>
+                      <span class="n">filters</span><span class="o">=</span><span class="p">[(</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span> <span class="o">&gt;=</span> <span class="n">time</span><span class="p">),(</span><span class="n">Price</span><span class="o">.</span><span class="n">companyID</span><span class="o">==</span><span class="n">company</span><span class="p">)],</span>
+                      <span class="n">order</span><span class="o">=</span><span class="n">Price</span><span class="o">.</span><span class="n">timeID</span><span class="p">,</span>
+                      <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="nb">list</span><span class="p">(),</span> <span class="n">joins</span><span class="o">=</span><span class="nb">list</span><span class="p">(),</span> <span class="n">filters</span><span class="o">=</span><span class="nb">list</span><span class="p">(),</span> <span class="n">order</span> <span class="o">=</span> <span class="kc">None</span> <span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function for query from table</span>
+
+<span class="sd">        Example self._get(Share, Share.min&gt;10, Share.max&lt;25)</span>
+<span class="sd">        Price1 = aliased(Price)</span>
+<span class="sd">         m.get(fields=[Price.timeID.label(&#39;sasa&#39;), Price1.timeID],</span>
+<span class="sd">                join=[(Share,Share.openID==Price.ID),(Price1, Share.closeID==Price1.ID )],</span>
+<span class="sd">                filter=[(Time.ID&lt;datetime.datetime(2015,6,4,10,10)),(Time.ID&gt;datetime.datetime(2015,6,4,10,1))],</span>
+<span class="sd">                order = Price,timeID)</span>
+
+<span class="sd">        :param Callable table: class of table</span>
+<span class="sd">        :param args: fillter expression like Share.min&gt;10, Share.max&lt;25</span>
+<span class="sd">        :return:</span>
+<span class="sd">        :rtype: DataFrame</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">qw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="o">*</span><span class="n">fields</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">joins</span><span class="p">:</span>
+            <span class="n">qw</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+            <span class="n">qw</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">qw</span> <span class="o">=</span> <span class="n">qw</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">qw</span><span class="o">.</span><span class="n">first</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">qw</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">()</span>
+
+    <span class="c1"># Price1 = aliased(Price)</span>
+    <span class="c1"># print(m.get(fields=(Price.timeID.label(&#39;time&#39;), Price.companyID, Price.price),</span>
+    <span class="c1">#             filter=(Price.timeID&gt;datetime(2020,1,16,11,0),Price.timeID&lt;datetime(2020,1,16,11,4), Price.companyID==&#39;SBER&#39;)))</span>
+    <span class="c1"># print(m.get(fields=(Price.timeID,Price.companyID,Share.high,Share.low,Share.value,Share.value,Price.price, Price1.price),</span>
+    <span class="c1">#             filter=(Price.timeID&gt;datetime(2020,1,16,10,55),Price.timeID&lt;datetime(2020,1,16,11,30), Price.companyID==&#39;GAZP&#39;, Share.intervalID == &#39;10m&#39;),</span>
+    <span class="c1">#             join=((Share,Share.openID==Price.ID),(Price1,Share.closeID==Price1.ID))))</span>
+    <span class="n">Price1</span> <span class="o">=</span> <span class="n">aliased</span><span class="p">(</span><span class="n">Price</span><span class="p">)</span>
+    <span class="c1"># print(m.get(fields=[Share.high,Share.low, Price.timeID,  Price1.timeID, Price.price, Price1.price, Share.intervalID, Price.companyID],</span>
+    <span class="c1">#             joins=[(Price, Share.openID == Price.ID), (Price1, Share.closeID == Price1.ID)],</span>
+    <span class="c1">#             filters=[(Price.timeID&gt;datetime(2018,1,5,10,55)),(Price.timeID&lt;datetime(2019,1,5,10,55)),(Price.companyID==&#39;GAZP&#39;)],</span>
+    <span class="c1">#             order = Price.timeID))</span>
+    <span class="c1"># for x in m.session.query(Price.ID, Price.timeID, Price.companyID).filter(Price.timeID&gt;datetime(2020,1,20,10,55)).all():</span>
+    <span class="c1">#     print(x)</span>
+    <span class="c1"># m.connection.execute(setattr())</span>
+    <span class="c1"># primaryKeyColName = table.primary_key.colum</span>
+    <span class="c1"># for y in [&#39;1d&#39;,&#39;1h&#39;,&#39;10m&#39;,&#39;1m&#39;]:</span>
+    <span class="c1">#     for x in [&#39;SBER&#39;,&#39;GAZP&#39;]:</span>
+    <span class="c1">#         m.put(x, &#39;2018-01-01&#39;, &#39;2019-10-01&#39;, y)</span>
+    <span class="c1"># print(m.get_price(datetime(2018,10,5,11,2)))</span>
+    <span class="c1"># print(m.get_company())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">get_share</span><span class="p">(</span><span class="s1">&#39;SBER&#39;</span><span class="p">,</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;1d&#39;</span><span class="p">))</span>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">DataBase 0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+    </div>
+  </body>
+</html>

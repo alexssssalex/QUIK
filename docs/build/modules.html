@@ -1,0 +1,376 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Description &#8212; DataBase 0 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Table of content" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Table of content"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DataBase 0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Description</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+<li><a class="reference internal" href="#use-cases">Use cases</a></li>
+<li><a class="reference internal" href="#database-structure">Database structure</a></li>
+<li><a class="reference internal" href="#class-structure">class structure</a></li>
+<li><a class="reference internal" href="#packages-and-files">Packages and files</a><ul>
+<li><a class="reference internal" href="#module-config">CONFIG</a></li>
+<li><a class="reference internal" href="#database">DataBase</a><ul>
+<li><a class="reference internal" href="#data">data</a></li>
+<li><a class="reference internal" href="#id1">DataBase</a></li>
+<li><a class="reference internal" href="#module-Database.Manager">Manager</a></li>
+<li><a class="reference internal" href="#module-Loader.Loader">Loader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Table of content</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modules.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="description">
+<h1>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h1>
+<p>Market robot
+Remarks:</p>
+<ul class="simple">
+<li><p>all exchange data by DataFrame with index axis Timestamp</p></li>
+<li><p>config.py - file with config constant</p></li>
+<li><p>DataBase - package work with data base;</p></li>
+</ul>
+</div>
+<div class="section" id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h1>
+<p>This is first version for test database. Next level implement class which
+give ability simulate Exchange:</p>
+<ul class="simple">
+<li><p>class can add user;</p></li>
+<li><p>user can ask current time;</p></li>
+<li><p>use can ask history only before time;</p></li>
+<li><p>user can buy and sold share;</p></li>
+</ul>
+</div>
+<div class="section" id="use-cases">
+<h1>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-default">
+<img alt="_images/UseCases.png" src="_images/UseCases.png" />
+</div>
+</div>
+<div class="section" id="database-structure">
+<h1>Database structure<a class="headerlink" href="#database-structure" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-default" id="id2">
+<img alt="_images/DataBase.png" src="_images/DataBase.png" />
+<p class="caption"><span class="caption-text">Structure of database</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="class-structure">
+<h1>class structure<a class="headerlink" href="#class-structure" title="Permalink to this headline">¶</a></h1>
+<div class="figure align-default">
+<img alt="_images/Classes.png" src="_images/Classes.png" />
+</div>
+</div>
+<div class="section" id="packages-and-files">
+<h1>Packages and files<a class="headerlink" href="#packages-and-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-config">
+<span id="config"></span><h2>CONFIG<a class="headerlink" href="#module-config" title="Permalink to this headline">¶</a></h2>
+<p>FILE CONFIG</p>
+<dl class="data">
+<dt id="config.COMPANY">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">COMPANY</code><em class="property"> = 'data/company.csv'</em><a class="headerlink" href="#config.COMPANY" title="Permalink to this definition">¶</a></dt>
+<dd><p>file with company name</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="config.DATABASE">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">DATABASE</code><em class="property"> = 'sqlite:///data/database.db'</em><a class="headerlink" href="#config.DATABASE" title="Permalink to this definition">¶</a></dt>
+<dd><p>database</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="config.LOG_FILE">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">LOG_FILE</code><em class="property"> = 'log/log.log'</em><a class="headerlink" href="#config.LOG_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>log file name</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="config.LOG_FILE_COUNT">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">LOG_FILE_COUNT</code><em class="property"> = 2</em><a class="headerlink" href="#config.LOG_FILE_COUNT" title="Permalink to this definition">¶</a></dt>
+<dd><p>max count of logs files</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="config.LOG_FILE_SIZE">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">LOG_FILE_SIZE</code><em class="property"> = 524288</em><a class="headerlink" href="#config.LOG_FILE_SIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>max size of log file (bytes)</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="config.LOG_LEVEL">
+<code class="sig-prename descclassname">config.</code><code class="sig-name descname">LOG_LEVEL</code><em class="property"> = 10</em><a class="headerlink" href="#config.LOG_LEVEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>level debug</p>
+</dd></dl>
+
+</div>
+<div class="section" id="database">
+<h2>DataBase<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h2>
+<p>Package respond for create and communication with database.</p>
+<ul class="simple">
+<li><p>exchange with external application by DataFrame;</p></li>
+<li><p>implement method for usual task</p></li>
+<li><p>manage reliability database;</p></li>
+<li><dl class="simple">
+<dt>implement method for usual task:</dt><dd><ul>
+<li><p>get data from database(as DataFrame);</p></li>
+<li><p>put data (DataFrame) from DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="data">
+<h3>data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>Folder with data</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>company.csv</p></td>
+<td><p>file with company names</p></td>
+</tr>
+<tr class="row-even"><td><p>test.db</p></td>
+<td><p>data base</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h3>DataBase<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-Database.Tables"></span><p>Module is description of database</p>
+<dl class="class">
+<dt id="Database.Tables.Company">
+<em class="property">class </em><code class="sig-prename descclassname">Database.Tables.</code><code class="sig-name descname">Company</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Tables.html#Company"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Tables.Company" title="Permalink to this definition">¶</a></dt>
+<dd><p>Company description.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="Database.Tables.Interval">
+<em class="property">class </em><code class="sig-prename descclassname">Database.Tables.</code><code class="sig-name descname">Interval</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Tables.html#Interval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Tables.Interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Company description.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="Database.Tables.Price">
+<em class="property">class </em><code class="sig-prename descclassname">Database.Tables.</code><code class="sig-name descname">Price</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Tables.html#Price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Tables.Price" title="Permalink to this definition">¶</a></dt>
+<dd><p>Company description.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="Database.Tables.Share">
+<em class="property">class </em><code class="sig-prename descclassname">Database.Tables.</code><code class="sig-name descname">Share</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Tables.html#Share"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Tables.Share" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shares.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="Database.Tables.Time">
+<em class="property">class </em><code class="sig-prename descclassname">Database.Tables.</code><code class="sig-name descname">Time</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Tables.html#Time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Tables.Time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Company description.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-Database.Manager">
+<span id="manager"></span><h3>Manager<a class="headerlink" href="#module-Database.Manager" title="Permalink to this headline">¶</a></h3>
+<p>Module response for interaction with database.</p>
+<dl class="class">
+<dt id="Database.Manager.Manager">
+<em class="property">class </em><code class="sig-prename descclassname">Database.Manager.</code><code class="sig-name descname">Manager</code><a class="reference internal" href="_modules/Database/Manager.html#Manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Manager.Manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class is manager of database:</p>
+<ul class="simple">
+<li><p>create session;</p></li>
+<li><dl class="simple">
+<dt>give convinient method for frequency request:</dt><dd><ul>
+<li><p>put DataFrame in database (if there was the same record - ignore them);</p></li>
+<li><p>get query from database as DataFrame;</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="method">
+<dt id="Database.Manager.Manager.get_company">
+<code class="sig-name descname">get_company</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Manager.html#Manager.get_company"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Manager.Manager.get_company" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get list company in database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Database.Manager.Manager.get_price">
+<code class="sig-name descname">get_price</code><span class="sig-paren">(</span><em class="sig-param">time</em>, <em class="sig-param">company=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Manager.html#Manager.get_price"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Manager.Manager.get_price" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get price for all company or specific company</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime</em>) – time</p></li>
+<li><p><strong>company</strong> (<em>str</em>) – short name company</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Database.Manager.Manager.get_share">
+<code class="sig-name descname">get_share</code><span class="sig-paren">(</span><em class="sig-param">company</em>, <em class="sig-param">time1</em>, <em class="sig-param">time2</em>, <em class="sig-param">interval</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Manager.html#Manager.get_share"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Manager.Manager.get_share" title="Permalink to this definition">¶</a></dt>
+<dd><p>get share for company from tim11 to time2 with interval</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>company</strong> (<em>str</em>) – short name company</p></li>
+<li><p><strong>time1</strong> (<em>datetime</em>) – start time</p></li>
+<li><p><strong>time2</strong> (<em>datetime</em>) – end time</p></li>
+<li><p><strong>interval</strong> (<em>str</em>) – interval</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="Database.Manager.Manager.put">
+<code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">company</em>, <em class="sig-param">date1</em>, <em class="sig-param">date2</em>, <em class="sig-param">interval</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Database/Manager.html#Manager.put"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Database.Manager.Manager.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put data ‘company’ with ‘interval’ from ‘data1’ to ‘data2’ in database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>company</strong> (<em>str</em>) – company secid</p></li>
+<li><p><strong>interval</strong> (<em>str</em>) – interval record (valid value ‘1m’‘10m’‘1h’‘1d’)</p></li>
+<li><p><strong>date1</strong> (<em>str</em>) – data in format ‘2015-09-22’</p></li>
+<li><p><strong>date2</strong> (<em>str</em>) – data in format ‘2015-09-22’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-Loader.Loader">
+<span id="loader"></span><h3>Loader<a class="headerlink" href="#module-Loader.Loader" title="Permalink to this headline">¶</a></h3>
+<p>Module for load data</p>
+<dl class="class">
+<dt id="Loader.Loader.Loader">
+<em class="property">class </em><code class="sig-prename descclassname">Loader.Loader.</code><code class="sig-name descname">Loader</code><a class="reference internal" href="_modules/Loader/Loader.html#Loader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Loader.Loader.Loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to fill data base</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Table of content"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">DataBase 0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, .
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+    </div>
+  </body>
+</html>
